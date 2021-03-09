@@ -1,15 +1,28 @@
 #include <iostream>
 #include <ctime>
 #include <conio.h>
+#include <Windows.h>
 
 #pragma region 확률 관련 구조체와 초기화 함수 + 획득한 카드 수 구조체와 초기화 함수
 typedef struct pullrate
 {
-	int oneStar;
-	int twoStar;
-	int threeStar;
-	int fourStar;
-	int fiveStar;
+	float oneStar;
+	float twoStar;
+	float threeStar;
+	float fourStar;
+	float fiveStar;
+
+	struct pullrate operator=(const struct pullrate& right)
+	{
+		oneStar = right.oneStar;
+		twoStar = right.twoStar;
+		threeStar = right.threeStar;
+		fourStar = right.fourStar;
+		fiveStar = right.fiveStar;
+
+		return *this;
+	}
+
 } PULLRATE;
 PULLRATE pullRate;
 typedef struct pulledcards
@@ -22,13 +35,13 @@ typedef struct pulledcards
 } PULLEDCARDS;
 PULLEDCARDS pulledCards;
 
-void InitRate(PULLRATE* pullrate_struct, int one = 50, int two = 70, int three = 90, int four = 93, int five = 97)
+void InitRate(PULLRATE* pullrate_struct, float one = 50, float two = 30, float three = 10, float four = 7, float five = 3)
 {
-	pullrate_struct->oneStar	= one;
-	pullrate_struct->twoStar	= two;
-	pullrate_struct->threeStar	= three;
-	pullrate_struct->fourStar	= four;
-	pullrate_struct->fiveStar	= five;
+	pullrate_struct->oneStar	= 100.0f - one;
+	pullrate_struct->twoStar	= 100.0f - two;
+	pullrate_struct->threeStar	= 100.0f - three;
+	pullrate_struct->fourStar	= 100.0f - four;
+	pullrate_struct->fiveStar	= 100.0f - five;
 }
 void InitCount(PULLEDCARDS* pulledcards_struct)
 {
@@ -43,11 +56,14 @@ void InitCount(PULLEDCARDS* pulledcards_struct)
 #pragma region 함수 선언
 void Mainscreen();
 void ShowRate();
+bool ShowRate(PULLRATE);
 void RunGatcha();
+void ResetPullrate();
 void Gatcha(int count);
+void Delay(int count);
 #pragma endregion
 
-
+bool isDelayDisabled = false;
 
 int main()
 {
@@ -66,7 +82,7 @@ void Mainscreen()
 
 	int input = 0;
 
-	while (input != 51)
+	while (input != 53)
 	{
 		input = 0;
 
@@ -75,7 +91,10 @@ void Mainscreen()
 
 		std::cout << "(1) 확률 알아보기" << std::endl;
 		std::cout << "(2) 가챠 돌리기" << std::endl;
-		std::cout << "(3) 종료" << std::endl;
+		std::cout << "(3) 확률 재설정" << std::endl;
+		if(isDelayDisabled) { std::cout << "(4) 쫄깃함 상태: 꺼짐" << std::endl; }
+		else { std::cout << "(4) 쫄깃함 상태: 켜짐" << std::endl; }
+		std::cout << "(5) 종료" << std::endl;
 
 		input = _getch();
 		
@@ -91,7 +110,12 @@ void Mainscreen()
 			break;
 
 		case 51:
-			return;
+			ResetPullrate();
+			break;
+
+		case 52:
+			isDelayDisabled = !isDelayDisabled;
+			break;
 
 		default:
 			break;
@@ -100,22 +124,52 @@ void Mainscreen()
 	}
 }
 
+#pragma region ShowRate 오버로딩
 void ShowRate()
 {
 	system("cls");
 
 	char buffer;
 
-	std::cout << "1성: " << 100 - pullRate.oneStar		<< "%" << std::endl;
-	std::cout << "2성: " << 100 - pullRate.twoStar		<< "%" << std::endl;
-	std::cout << "3성: " << 100 - pullRate.threeStar		<< "%" << std::endl;
-	std::cout << "4성: " << 100 - pullRate.fourStar		<< "%" << std::endl;
-	std::cout << "5성: " << 100 - pullRate.fiveStar		<< "%" << std::endl;
+	std::cout << "1성: " << 100.0f - pullRate.oneStar		<< "%" << std::endl;
+	std::cout << "2성: " << 100.0f - pullRate.twoStar		<< "%" << std::endl;
+	std::cout << "3성: " << 100.0f - pullRate.threeStar		<< "%" << std::endl;
+	std::cout << "4성: " << 100.0f - pullRate.fourStar		<< "%" << std::endl;
+	std::cout << "5성: " << 100.0f - pullRate.fiveStar		<< "%" << std::endl;
 	std::cout << std::endl;
-	
+
 	std::cout << "돌아가려면 아무 키나 누르세요..." << std::endl;
 	buffer = _getch();
 }
+
+bool ShowRate(PULLRATE pullRate)
+{
+	system("cls");
+
+	std::cout << "1성: " << 100.0f - pullRate.oneStar		<< "%" << std::endl;
+	std::cout << "2성: " << 100.0f - pullRate.twoStar		<< "%" << std::endl;
+	std::cout << "3성: " << 100.0f - pullRate.threeStar		<< "%" << std::endl;
+	std::cout << "4성: " << 100.0f - pullRate.fourStar		<< "%" << std::endl;
+	std::cout << "5성: " << 100.0f - pullRate.fiveStar		<< "%" << std::endl;
+	std::cout << std::endl;
+
+	while (true)
+	{
+		char input;
+
+		std::cout << "이 확률을 사용할까요? (Y/N)" << std::endl;
+		std::cin >> input;
+
+		if ((input == 'Y') || (input == 'y'))
+			return true;
+		else if ((input == 'N') || (input == 'n'))
+			return false;
+		else
+			system("cls");
+	}
+}
+#pragma endregion
+
 
 void RunGatcha()
 {
@@ -169,16 +223,71 @@ void RunGatcha()
 	}
 }
 
+void ResetPullrate()
+{
+	
+
+	PULLRATE tempRate;
+	float	 tempInput	= 0;
+	float	 whole		= 100;
+
+	while(true)
+	{
+		system("cls");
+		whole = 100;
+		for (int i = 0; i < 4; ++i)
+		{
+			while (true)
+			{
+				std::cout << "남은 %: " << whole << std::endl;
+				std::cout << i + 1 << "성 확률: ";
+				std::cin >> tempInput;
+				if (tempInput >= whole)
+				{
+					std::cout << "잘못된 입력입니다.\r\n";
+				}
+				else
+				{
+					whole -= tempInput;
+					switch (i)
+					{
+					case 0:
+						tempRate.oneStar	= 100.0f - tempInput;
+						break;
+					case 1:
+						tempRate.twoStar	= 100.0f - tempInput;
+						break;
+					case 2:
+						tempRate.threeStar	= 100.0f - tempInput;
+						break;
+					case 3:
+						tempRate.fourStar	= 100.0f - tempInput;
+						break;
+					}
+					break;
+				}
+			}
+		}
+		tempRate.fiveStar = 100.0f - whole;
+
+		if (ShowRate(tempRate))
+		{
+			pullRate = tempRate;
+			return;
+		}
+	}
+}
+
 void Gatcha(int count)
 {
 	system("cls");
 
-	int  randNum;
-	char buffer;
+	float randNum;
+	char  buffer;
 
 	for (int i = 0; i < count; ++i)
 	{
-		randNum = rand() % 100 + 1;
+		randNum = (rand() % 10000 + 1) * 0.01f;
 		if (randNum >= pullRate.fiveStar)
 		{
 			++pulledCards.fiveStar;
@@ -201,6 +310,9 @@ void Gatcha(int count)
 		}
 	}
 
+	if(!isDelayDisabled)
+		Delay(count);
+
 	std::cout << "획득한 카드 수:" << std::endl;
 	std::cout << "5성: " << pulledCards.fiveStar		<< std::endl;
 	std::cout << "4성: " << pulledCards.fourStar		<< std::endl;
@@ -211,5 +323,48 @@ void Gatcha(int count)
 
 	std::cout << "돌아가려면 아무 키나 누르세요..." << std::endl;
 	buffer = _getch();
+}
+
+void Delay(int count)
+{
+	switch (count)
+	{
+	case 1:
+		std::cout << "";
+		Sleep(250);
+		std::cout << ".";
+		Sleep(250);
+		std::cout << ".";
+		Sleep(250);
+		std::cout << ".";
+		Sleep(250);
+		system("cls");
+		break;
+
+	default:
+		int repeatCount;
+
+		if (count > 300)
+		{
+			repeatCount = 10;
+		}
+		else
+		{
+			repeatCount = count / 10;
+		}
+		for (int i = 0; i < repeatCount; ++i)
+		{
+			std::cout << "";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+			std::cout << ".";
+			Sleep(250);
+			system("cls");
+		}
+		break;
+	}
 }
 #pragma endregion

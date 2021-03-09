@@ -15,7 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GamePrograming 3 9.cpp">
+    <ClCompile Include="3 9 5.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="3 9 6.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

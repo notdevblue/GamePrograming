@@ -1,4 +1,7 @@
-﻿#include <iostream>
+﻿//#define THIS
+
+#ifdef THIS
+#include <iostream>
 #include <time.h>
 
 int main()
@@ -21,15 +24,11 @@ int main()
 #pragma endregion
 
 #pragma region 시간
-    struct tm t = { 0 };
+    struct tm t = { 0 }; 
     localtime_s(&t, &j);
     printf("%d년 %d월 %d일", t.tm_year + 1900, t.tm_mon + 1, t.tm_mday);
 #pragma endregion
 
-    
-
-
-
-
     return(0);
 }
+#endif

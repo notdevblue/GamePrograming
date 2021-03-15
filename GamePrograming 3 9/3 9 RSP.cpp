@@ -1,3 +1,7 @@
+//#define THIS
+
+#ifdef THIS
+
 #include <iostream>
 
 const char* DisplayRSP(int);
@@ -133,3 +137,5 @@ int CompareWinLose(int num)
 {
 	return(0);
 }
+
+#endif

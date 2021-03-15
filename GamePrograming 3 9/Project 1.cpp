@@ -3,6 +3,10 @@
 #include <conio.h>
 #include <Windows.h>
 
+//#define THIS
+
+#ifdef THIS
+
 #pragma region 확률 관련 구조체와 초기화 함수 + 획득한 카드 수 구조체와 초기화 함수
 typedef struct pullrate
 {
@@ -368,3 +372,5 @@ void Delay(int count)
 	}
 }
 #pragma endregion
+
+#endif

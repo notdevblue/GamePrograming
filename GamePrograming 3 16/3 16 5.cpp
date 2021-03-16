@@ -53,14 +53,20 @@ void PlayerInput()
 		int strike = StrkieCheck();
 		int ball = BallCheck();
 		int out = OutCheck();
-
-		std::cout << strike << "스트라이크" << std::endl;
-		std::cout << ball	<< "볼" << std::endl;
-		std::cout << out	<< "아웃" << std::endl;
-
+		
 		if (strike == 3)
 		{
 			return;
+		}
+
+		if (!OutCheck)
+		{
+			std::cout << strike << "스트라이크" << std::endl;
+			std::cout << ball << "볼" << std::endl;
+		}
+		else
+		{
+			std::cout << "아웃" << std::endl;
 		}
 	}
 }
@@ -123,5 +129,13 @@ int OutCheck()
 		outCheck = 0;
 	}
 
-	return outCount;
+	if (outCount == 3)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+	
 }

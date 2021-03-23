@@ -91,6 +91,8 @@ void userInput(int* arr)
 	int keypushed[2] = { 0, };
 	int selectCount = 0;
 
+	// 12345qwertasdfgzxcvb
+
 	while (true)
 	{
 		key = _getch();

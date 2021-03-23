@@ -11,8 +11,10 @@ bool checkNumArchive(int*, int);
 void showNumbers(int*);
 void showHiddenNumbers();
 void userInput(int*);
-
+int  userInput2ArrIndex(int*);
+int  showCard(int* arr, int* select, int* inputIndex, int* inputHistory, int index, int& count);
 void gotoXY(int x, int y);
+bool checkGameend(int* inputIndex);
 
 int main()
 {
@@ -27,6 +29,12 @@ int main()
 	showHiddenNumbers();
 #pragma endregion
 	userInput(numbers);
+
+	Sleep(1000);
+	system("cls");
+	gotoXY(0, 0);
+	std::cout << "Å¬¸®¾î!" << std::endl;
+	
 
 
 	return(0);
@@ -86,107 +94,95 @@ void showHiddenNumbers()
 
 void userInput(int* arr)
 {
-	int key;
+	int historyArr = 0;
 	int select[2] = { -1,-1 };
-	int keypushed[2] = { 0, };
+	int inputIndex[2] = { -1, -1 };
+	int inputHistory[20] = { -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 };
+	int inputArr[20] = { '1','2','3','4','5','q','w','e','r','t','a','s','d','f','g','z','x','c','v','b' };
 	int selectCount = 0;
 
 	// 12345qwertasdfgzxcvb
 
 	while (true)
 	{
-		key = _getch();
-		switch (key)
-		{
-		case '1': // 12345
-			gotoXY(0, 0);
-			std::cout << arr[0];
-			select[selectCount] = arr[0];
-			keypushed[selectCount] = '1';
-			++selectCount;
-			break;
+		int index = userInput2ArrIndex(inputArr);
+		if (index == -1)
+			continue;
 
-		case '2':
-			gotoXY(1, 0);
-			std::cout << arr[1];
-			select[selectCount] = arr[1];
-			keypushed[selectCount] = '2';
-			++selectCount;
-			break;
-
-		case '3':
-			gotoXY(2, 0);
-			arr[2];
-			select[selectCount] = arr[2];
-			keypushed[selectCount] = '3';
-			++selectCount;
-			break;
-
-		case '4':
-			break;
-
-		case '5':
-			break;
-
-		case 'q': // QWERT
-			break;
-			
-		case 'w':
-			break;
-
-		case 'e':
-			break;
-
-		case 'r':
-			break;
-
-		case 't':
-			break;
-
-		case 'a': // ASDFG
-			break;
-
-		case 's':
-			break;
-
-		case 'd':
-			break;
-
-		case 'f':
-			break;
-
-		case 'g':
-			break;
-
-		case 'z': // ZXCVB
-			break;
-
-		case 'x':
-			break;
-
-		case 'c':
-			break;
-
-		case 'v':
-			break;
-
-		case 'b':
-			break;
-		}
-
-		Sleep(1000);
+		if (showCard(arr, select, inputIndex, inputHistory, index, selectCount) == -1)
+			continue;
 
 		if (selectCount == 2)
 		{
+			Sleep(1000);
 			if (select[0] != select[1])
 			{
-
+				gotoXY(inputIndex[0] % 5, inputIndex[0] / 5);
+				std::cout << "*";
+				gotoXY(inputIndex[1] % 5, inputIndex[1] / 5);
+				std::cout << "*";
+				inputIndex[0] = -1;
+				inputIndex[1] = -1;
 			}
-			selectCount = 0;
+			else
+			{
+				inputHistory[historyArr] = inputIndex[0];
+				++historyArr;
+				inputHistory[historyArr] = inputIndex[1];
+				++historyArr;
+			}
+			inputIndex[0]	= -1;
+			inputIndex[1]	= -1;
+			selectCount		= 0;
+		}
+
+		if (checkGameend(inputHistory))
+		{
+			return;
 		}
 	}
 }
 
+int userInput2ArrIndex(int* arr)
+{
+	int key = _getch();
+	for (int i = 0; i < NUMBERS; ++i)
+	{
+		if (key == arr[i])
+			return i;
+	}
+	return -1;
+}
+
+int showCard(int* arr, int* select, int* inputIndex, int* inputHistory, int index, int& count)
+{
+	for (int i = 0; i < 20; ++i)
+	{
+		if (inputHistory[i] == index)
+			return -1;
+	}
+
+	inputIndex[count] = index;
+	if ((inputIndex[0] == inputIndex[1]) && inputIndex[0] != -1)
+		return -1;
+
+	gotoXY(index % 5, index / 5);
+	std::cout << arr[index];
+	
+	select[count] = arr[index];
+	++count;
+	return 0;
+}
+
+bool checkGameend(int* inputIndex)
+{
+	for (int i = 0; i < 20; ++i)
+	{
+		if (inputIndex[i] == -1)
+			return false;
+	}
+	return true;
+}
 
 void gotoXY(int x, int y)
 {

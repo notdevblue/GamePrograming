@@ -10,7 +10,7 @@ bool checkNumArchive(int*, int);
 
 void showNumbers(int*);
 void showHiddenNumbers();
-void userInput();
+void userInput(int*);
 
 void gotoXY(int x, int y);
 
@@ -26,7 +26,7 @@ int main()
 	system("cls");
 	showHiddenNumbers();
 #pragma endregion
-
+	userInput(numbers);
 
 
 	return(0);
@@ -88,6 +88,7 @@ void userInput(int* arr)
 {
 	int key;
 	int select[2] = { -1,-1 };
+	int keypushed[2] = { 0, };
 	int selectCount = 0;
 
 	while (true)
@@ -95,23 +96,79 @@ void userInput(int* arr)
 		key = _getch();
 		switch (key)
 		{
-		case 49:
+		case '1': // 12345
 			gotoXY(0, 0);
-			arr[0];
+			std::cout << arr[0];
 			select[selectCount] = arr[0];
+			keypushed[selectCount] = '1';
 			++selectCount;
 			break;
-		case 50:
+
+		case '2':
 			gotoXY(1, 0);
-			arr[1];
+			std::cout << arr[1];
 			select[selectCount] = arr[1];
+			keypushed[selectCount] = '2';
 			++selectCount;
 			break;
-		case 51:
+
+		case '3':
 			gotoXY(2, 0);
 			arr[2];
 			select[selectCount] = arr[2];
+			keypushed[selectCount] = '3';
 			++selectCount;
+			break;
+
+		case '4':
+			break;
+
+		case '5':
+			break;
+
+		case 'q': // QWERT
+			break;
+			
+		case 'w':
+			break;
+
+		case 'e':
+			break;
+
+		case 'r':
+			break;
+
+		case 't':
+			break;
+
+		case 'a': // ASDFG
+			break;
+
+		case 's':
+			break;
+
+		case 'd':
+			break;
+
+		case 'f':
+			break;
+
+		case 'g':
+			break;
+
+		case 'z': // ZXCVB
+			break;
+
+		case 'x':
+			break;
+
+		case 'c':
+			break;
+
+		case 'v':
+			break;
+
+		case 'b':
 			break;
 		}
 

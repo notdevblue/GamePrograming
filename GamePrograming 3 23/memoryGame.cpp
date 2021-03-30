@@ -14,13 +14,15 @@ void userInput(int*);
 int  userInput2ArrIndex(int*);
 int  showCard(int* arr, int* select, int* inputIndex, int* inputHistory, int index, int& count);
 void gotoXY(int x, int y);
-bool checkGameend(int* inputIndex);
+bool checkGameEnd(int* inputIndex);
 
 int main()
 {
-	int numbers[NUMBERS] = { 0, };
+	int numbers[NUMBERS] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 , -1 };
 
 	init(numbers);
+
+	system("mode con cols=30 lines=10");
 
 #pragma region BEGIN
 	showNumbers(numbers);
@@ -45,15 +47,28 @@ void init(int* arr)
 {
 	srand(unsigned(time(NULL)));
 
-	for (int i = 0; i < NUMBERS; ++i)
+	//for (int i = 0; i < NUMBERS; ++i)
+	//{
+	//	arr[i] = rand() % NUMBERS / 2;
+	//	if (i > 1)
+	//	{
+	//		do
+	//		{
+	//			arr[i] = rand() % (NUMBERS / 2);
+	//		} while (!checkNumArchive(arr, i));
+	//	}
+	//}
+
+	for (int i = 0; i < 10; ++i)
 	{
-		arr[i] = rand() % NUMBERS / 2;
-		if (i > 1)
+		for (int j = 0; j < 2; )
 		{
-			do
+			int randArr = rand() % NUMBERS;
+			if (arr[randArr] == -1)
 			{
-				arr[i] = rand() % (NUMBERS / 2);
-			} while (!checkNumArchive(arr, i));
+				arr[randArr] = i;
+				++j;
+			}
 		}
 	}
 }
@@ -123,6 +138,7 @@ void userInput(int* arr)
 				std::cout << "*";
 				inputIndex[0] = -1;
 				inputIndex[1] = -1;
+
 			}
 			else
 			{
@@ -135,8 +151,8 @@ void userInput(int* arr)
 			inputIndex[1]	= -1;
 			selectCount		= 0;
 		}
-
-		if (checkGameend(inputHistory))
+		
+		if (checkGameEnd(inputHistory))
 		{
 			return;
 		}
@@ -174,7 +190,7 @@ int showCard(int* arr, int* select, int* inputIndex, int* inputHistory, int inde
 	return 0;
 }
 
-bool checkGameend(int* inputIndex)
+bool checkGameEnd(int* inputIndex)
 {
 	for (int i = 0; i < 20; ++i)
 	{

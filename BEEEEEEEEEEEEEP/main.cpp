@@ -1,5 +1,5 @@
 #include <Windows.h>
-
+#include <iostream>
 #define FULL	2250
 #define HALF	FULL / 2
 #define QUATER	HALF / 2
@@ -48,53 +48,113 @@ struct Freq
 	DWORD B6	= 1975;
 };
 
+DWORD WINAPI ThreadProc(LPVOID lpParam);
 
 
 int main()
 {
+	
+	HANDLE hThread = CreateThread(NULL, 0, ThreadProc, NULL, 0, NULL);
+
+	if (WaitForSingleObject(hThread, INFINITE) == WAIT_OBJECT_0)
+	{
+		std::cout << "\r\n좋네요" << std::endl;
+	}
+	else
+	{
+		CloseHandle(hThread);
+		return(-1);
+	}
+	
+	
+
+
+
+	CloseHandle(hThread);
+	return(0);
+}
+
+DWORD WINAPI ThreadProc(LPVOID lpParam)
+{
 	Freq freq;
 
+	std::cout << "솔";
 	Beep(freq.G5, EIGHT);
-	
+
+	std::cout << "도";
 	Beep(freq.C6, QUATER);
+	std::cout << "솔";
 	Beep(freq.G5, EIGHT + SIXTEEN);
+	std::cout << "라";
 	Beep(freq.A5, SIXTEEN);
+	std::cout << "시";
 	Beep(freq.B5, QUATER);
+	std::cout << "미";
 	Beep(freq.E5, EIGHT);
+	std::cout << "미";
 	Beep(freq.E5, EIGHT);
 
+	std::cout << "라";
 	Beep(freq.A5, QUATER);
+	std::cout << "솔";
 	Beep(freq.G5, EIGHT + SIXTEEN);
+	std::cout << "파";
 	Beep(freq.F5, SIXTEEN);
+	std::cout << "솔";
 	Beep(freq.G5, QUATER);
+	std::cout << "도";
 	Beep(freq.C5, EIGHT);
+	std::cout << "도";
 	Beep(freq.C5, EIGHT);
 
+	std::cout << "레";
 	Beep(freq.D5, QUATER);
+	std::cout << "레";
 	Beep(freq.D5, EIGHT);
+	std::cout << "미";
 	Beep(freq.E5, EIGHT);
+	std::cout << "파";
 	Beep(freq.F5, QUATER);
+	std::cout << "파";
 	Beep(freq.F5, EIGHT);
+	std::cout << "솔";
 	Beep(freq.G5, EIGHT);
 
+	std::cout << "라";
 	Beep(freq.A5, QUATER);
+	std::cout << "시";
 	Beep(freq.B5, EIGHT);
+	std::cout << "도";
 	Beep(freq.C6, EIGHT);
+	std::cout << "레";
 	Beep(freq.D6, QUATER + EIGHT);
+	std::cout << "(쉼표)";
 	Sleep(EIGHT);
 
+	std::cout << "미";
 	Beep(freq.E6, QUATER);
+	std::cout << "레";
 	Beep(freq.D6, EIGHT + SIXTEEN);
+	std::cout << "도";
 	Beep(freq.C6, SIXTEEN);
+	std::cout << "레";
 	Beep(freq.D6, QUATER);
+	std::cout << "시";
 	Beep(freq.B5, EIGHT);
+	std::cout << "솔";
 	Beep(freq.G5, EIGHT);
 
+	std::cout << "도";
 	Beep(freq.C6, QUATER);
+	std::cout << "시";
 	Beep(freq.B5, EIGHT + SIXTEEN);
+	std::cout << "라";
 	Beep(freq.A5, SIXTEEN);
+	std::cout << "시";
 	Beep(freq.B5, QUATER);
+	std::cout << "미";
 	Beep(freq.E5, EIGHT);
+	std::cout << "미";
 	Beep(freq.E5, EIGHT);
 
 	return(0);

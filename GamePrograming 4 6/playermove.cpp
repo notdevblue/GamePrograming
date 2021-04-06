@@ -9,6 +9,7 @@
 
 #define SIZEX 21
 #define SIZEY 20
+#define PLUSNUM 10
 
 #pragma region 전역변수
 int g_curX;
@@ -197,7 +198,7 @@ void generatePlus() // 2번
 {
 	srand(unsigned(time(NULL)));
 
-	for (int i = 0; i < 10; i)
+	for (int i = 0; i < PLUSNUM; i)
 	{
 		int x = rand() % (SIZEX - 1);
 		int y = rand() % SIZEY;
@@ -212,22 +213,34 @@ void generatePlus() // 2번
 
 void erasePlus() // 3번
 {
-	if (g_curY - 1 != 0)
+	bool leftXPossible = g_curX - 1 > 0;
+	bool RightXPossible = g_curX + 1 < SIZEX - 2;
+	bool UpYPossible = g_curY - 1 > 0;
+	bool DownYPossible = g_curY + 1 < SIZEY - 1;
+
+
+	if (leftXPossible && RightXPossible)
 	{
-		g_map[g_curY - 1][g_curX] = '.';
-	}
-	if (g_curY + 1 != SIZEY - 1)
-	{
-		g_map[g_curY + 1][g_curX] = '.';
+		if (UpYPossible)
+		{
+			g_map[g_curY - 1][g_curX] = '.';
+		}
+		if (DownYPossible)
+		{
+			g_map[g_curY + 1][g_curX] = '.';
+		}
 	}
 
-	if (g_curX - 1 != 0)
+	if (UpYPossible && DownYPossible)
 	{
-		g_map[g_curY][g_curX - 1] = '.';
-	}
-	if (g_curX + 1 != SIZEX - 2)
-	{
-		g_map[g_curY][g_curX + 1] = '.';
+		if (leftXPossible)
+		{
+			g_map[g_curY][g_curX - 1] = '.';
+		}
+		if (RightXPossible)
+		{
+			g_map[g_curY][g_curX + 1] = '.';
+		}
 	}
 }
 

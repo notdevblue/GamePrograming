@@ -9,7 +9,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BEEEEEEEEEEEEEP", "BEEEEEEE
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GamePrograming 3 16", "GamePrograming 3 16\GamePrograming 3 16.vcxproj", "{0BC67D6A-5C21-484F-8486-3FBDFFD916EE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3 23", "GamePrograming 3 23\GamePrograming 3 23.vcxproj", "{6CDFFF3D-728D-4C2A-B3B6-9D6CE921B4F9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GamePrograming 3 23", "GamePrograming 3 23\GamePrograming 3 23.vcxproj", "{6CDFFF3D-728D-4C2A-B3B6-9D6CE921B4F9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GamePrograming 4 6", "GamePrograming 4 6\GamePrograming 4 6.vcxproj", "{85CA4A40-10E5-470C-9357-097E0090FBAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,14 @@ Global
 		{6CDFFF3D-728D-4C2A-B3B6-9D6CE921B4F9}.Release|x64.Build.0 = Release|x64
 		{6CDFFF3D-728D-4C2A-B3B6-9D6CE921B4F9}.Release|x86.ActiveCfg = Release|Win32
 		{6CDFFF3D-728D-4C2A-B3B6-9D6CE921B4F9}.Release|x86.Build.0 = Release|Win32
+		{85CA4A40-10E5-470C-9357-097E0090FBAC}.Debug|x64.ActiveCfg = Debug|x64
+		{85CA4A40-10E5-470C-9357-097E0090FBAC}.Debug|x64.Build.0 = Debug|x64
+		{85CA4A40-10E5-470C-9357-097E0090FBAC}.Debug|x86.ActiveCfg = Debug|Win32
+		{85CA4A40-10E5-470C-9357-097E0090FBAC}.Debug|x86.Build.0 = Debug|Win32
+		{85CA4A40-10E5-470C-9357-097E0090FBAC}.Release|x64.ActiveCfg = Release|x64
+		{85CA4A40-10E5-470C-9357-097E0090FBAC}.Release|x64.Build.0 = Release|x64
+		{85CA4A40-10E5-470C-9357-097E0090FBAC}.Release|x86.ActiveCfg = Release|Win32
+		{85CA4A40-10E5-470C-9357-097E0090FBAC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

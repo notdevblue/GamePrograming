@@ -13,7 +13,7 @@ void showHiddenNumbers();
 void userInput(int*);
 int  userInput2ArrIndex(int*);
 int  showCard(int* arr, int* select, int* inputIndex, int* inputHistory, int index, int& count);
-void gotoXY(int x, int y);
+void gotoxy(int x, int y);
 bool checkGameEnd(int* inputIndex);
 
 int main()
@@ -34,7 +34,7 @@ int main()
 
 	Sleep(1000);
 	system("cls");
-	gotoXY(0, 0);
+	gotoxy(0, 0);
 	std::cout << "Å¬¸®¾î!" << std::endl;
 	
 
@@ -93,7 +93,7 @@ void showNumbers(int* arr)
 {
 	for (int i = 0; i < NUMBERS; ++i)
 	{
-		gotoXY(i % 5, i / 5);
+		gotoxy(i % 5, i / 5);
 		std::cout << arr[i];
 	}
 }
@@ -102,7 +102,7 @@ void showHiddenNumbers()
 {
 	for (int i = 0; i < NUMBERS; ++i)
 	{
-		gotoXY(i % 5, i / 5);
+		gotoxy(i % 5, i / 5);
 		std::cout << '*';
 	}
 }
@@ -132,9 +132,9 @@ void userInput(int* arr)
 			Sleep(1000);
 			if (select[0] != select[1])
 			{
-				gotoXY(inputIndex[0] % 5, inputIndex[0] / 5);
+				gotoxy(inputIndex[0] % 5, inputIndex[0] / 5);
 				std::cout << "*";
-				gotoXY(inputIndex[1] % 5, inputIndex[1] / 5);
+				gotoxy(inputIndex[1] % 5, inputIndex[1] / 5);
 				std::cout << "*";
 				inputIndex[0] = -1;
 				inputIndex[1] = -1;
@@ -182,7 +182,7 @@ int showCard(int* arr, int* select, int* inputIndex, int* inputHistory, int inde
 	if ((inputIndex[0] == inputIndex[1]) && inputIndex[0] != -1)
 		return -1;
 
-	gotoXY(index % 5, index / 5);
+	gotoxy(index % 5, index / 5);
 	std::cout << arr[index];
 	
 	select[count] = arr[index];
@@ -200,7 +200,7 @@ bool checkGameEnd(int* inputIndex)
 	return true;
 }
 
-void gotoXY(int x, int y)
+void gotoxy(int x, int y)
 {
 	HANDLE hOut;
 	COORD cur;

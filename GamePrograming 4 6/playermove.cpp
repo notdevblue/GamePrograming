@@ -219,7 +219,7 @@ void erasePlus() // 3번
 	bool DownYPossible = g_curY + 1 < SIZEY - 1;
 
 
-	if (leftXPossible && RightXPossible)
+	if (leftXPossible && RightXPossible) // 좌표 태두리일때 안 되게
 	{
 		if (UpYPossible)
 		{

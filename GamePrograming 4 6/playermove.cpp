@@ -7,15 +7,17 @@
 #define LEFT 75
 #define RIGHT 77
 
-#define SIZEX 21
-#define SIZEY 20
+#define SIZEY 21
+#define SIZEX 20
 #define PLUSNUM 10
 
 #pragma region 전역변수
 int g_curX;
 int g_curY;
+int g_befX;
+int g_befY;
 
-char g_map[SIZEY][SIZEX] =
+char g_map[SIZEX][SIZEY] =
 {
 	"++++++++++++++++++++",
 	"+..................+",
@@ -43,7 +45,7 @@ char g_map[SIZEY][SIZEX] =
 #pragma region 함수 선언
 
 void gotoxy(int, int);
-void display();
+void display(bool b = false);
 void move(int);
 void generatePlus(); // 2번
 void erasePlus(); // 3번
@@ -54,10 +56,12 @@ int main()
 {
 	int ch;
 	g_curX = 1;
+	g_befX = 1;
 	g_curY = 1;
+	g_befY = 1;
 
 	generatePlus();
-
+	display(true);
 	while (true)
 	{
 		display();
@@ -110,22 +114,32 @@ void gotoxy(int x, int y)
 	SetConsoleCursorPosition(hOut, cur);
 }
 
-void display()
+void display(bool isInit)
 {
-	int x;
-	int y;
-	for (y = 0; y < SIZEY; ++y)
+	if (isInit)
 	{
-		for (x = 0; x < SIZEX; ++x)
+		int x;
+		int y;
+		for (y = 0; y < SIZEX; ++y)
 		{
-			gotoxy(x, y);
-			_putch(g_map[y][x]);
+			for (x = 0; x < SIZEY; ++x)
+			{
+				gotoxy(x, y);
+				_putch(g_map[y][x]);
+			}
 		}
+		
+		
+		gotoxy(25, 10);
+		std::cout << "Q: 종료";
+	}
+	else
+	{
+		gotoxy(g_befX, g_befY);
+		_putch('.');
 	}
 	gotoxy(g_curX, g_curY);
 	_putch('O');
-	gotoxy(25, 10);
-	std::cout << "Q: 종료";
 }
 
 void move(int dir)
@@ -158,10 +172,10 @@ void move(int dir)
 #pragma region 심화 2번
 	if (g_curX + dirX == -1)
 	{
-		g_curX = SIZEX - 2;
+		g_curX = SIZEY - 2;
 		return;
 	}
-	if (g_curX + dirX == SIZEX - 1)
+	if (g_curX + dirX == SIZEY - 1)
 	{
 		g_curX = 0;
 		return;
@@ -169,10 +183,10 @@ void move(int dir)
 
 	if (g_curY + dirY == -1)
 	{
-		g_curY = SIZEY - 1;
+		g_curY = SIZEX - 1;
 		return;
 	}
-	if (g_curY + dirY == SIZEY)
+	if (g_curY + dirY == SIZEX)
 	{
 		g_curY = 0;
 		return;
@@ -184,6 +198,8 @@ void move(int dir)
 
 	if (g_map[g_curY + dirY][g_curX + dirX] != '+')
 	{
+		g_befX = g_curX;
+		g_befY = g_curY;
 		g_curX += dirX;
 		g_curY += dirY;
 	}
@@ -200,8 +216,8 @@ void generatePlus() // 2번
 
 	for (int i = 0; i < PLUSNUM; i)
 	{
-		int x = rand() % (SIZEX - 1);
-		int y = rand() % SIZEY;
+		int x = rand() % (SIZEY - 1);
+		int y = rand() % SIZEX;
 
 		if (g_map[y][x] != '+')
 		{
@@ -214,12 +230,12 @@ void generatePlus() // 2번
 void erasePlus() // 3번
 {
 	bool leftXPossible = g_curX - 1 > 0;
-	bool RightXPossible = g_curX + 1 < SIZEX - 2;
+	bool RightXPossible = g_curX + 1 < SIZEY - 2;
 	bool UpYPossible = g_curY - 1 > 0;
-	bool DownYPossible = g_curY + 1 < SIZEY - 1;
+	bool DownYPossible = g_curY + 1 < SIZEX - 1;
 
 
-	if (g_curX != 0 && g_curX != SIZEX - 2) // 좌표 태두리일때 안 되게
+	if (g_curX != 0 && g_curX != SIZEY - 2) // 좌표 태두리일때 안 되게
 	{
 		if (UpYPossible)
 		{
@@ -231,7 +247,7 @@ void erasePlus() // 3번
 		}
 	}
 
-	if (g_curY != 0 && g_curY != SIZEY)
+	if (g_curY != 0 && g_curY != SIZEX)
 	{
 		if (leftXPossible)
 		{
@@ -246,16 +262,16 @@ void erasePlus() // 3번
 
 void eraseMirror() // 심화 1번
 {
-	if (g_curY - 1 == 0 || g_curY + 1 == SIZEY - 1)
+	if (g_curY - 1 == 0 || g_curY + 1 == SIZEX - 1)
 	{
 		g_map[0][g_curX] = '.';
-		g_map[SIZEY - 1][g_curX] = '.';
+		g_map[SIZEX - 1][g_curX] = '.';
 	}
 
-	if (g_curX - 1 == 0 || g_curX + 1 == SIZEX - 2)
+	if (g_curX - 1 == 0 || g_curX + 1 == SIZEY - 2)
 	{
 		g_map[g_curY][0] = '.';
-		g_map[g_curY][SIZEX - 2] = '.';
+		g_map[g_curY][SIZEY - 2] = '.';
 	}
 
 

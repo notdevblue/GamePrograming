@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GamePrograming 4 6", "GameP
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GamePrograming 4 13", "GamePrograming 4 13\GamePrograming 4 13.vcxproj", "{1CC3FB02-8A6F-4998-B848-F07E321F145B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GamePrograming 4 27", "GamePrograming 4 27\GamePrograming 4 27.vcxproj", "{2F312A4E-4768-4106-B6AA-F1EA96504ED3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -71,6 +73,14 @@ Global
 		{1CC3FB02-8A6F-4998-B848-F07E321F145B}.Release|x64.Build.0 = Release|x64
 		{1CC3FB02-8A6F-4998-B848-F07E321F145B}.Release|x86.ActiveCfg = Release|Win32
 		{1CC3FB02-8A6F-4998-B848-F07E321F145B}.Release|x86.Build.0 = Release|Win32
+		{2F312A4E-4768-4106-B6AA-F1EA96504ED3}.Debug|x64.ActiveCfg = Debug|x64
+		{2F312A4E-4768-4106-B6AA-F1EA96504ED3}.Debug|x64.Build.0 = Debug|x64
+		{2F312A4E-4768-4106-B6AA-F1EA96504ED3}.Debug|x86.ActiveCfg = Debug|Win32
+		{2F312A4E-4768-4106-B6AA-F1EA96504ED3}.Debug|x86.Build.0 = Debug|Win32
+		{2F312A4E-4768-4106-B6AA-F1EA96504ED3}.Release|x64.ActiveCfg = Release|x64
+		{2F312A4E-4768-4106-B6AA-F1EA96504ED3}.Release|x64.Build.0 = Release|x64
+		{2F312A4E-4768-4106-B6AA-F1EA96504ED3}.Release|x86.ActiveCfg = Release|Win32
+		{2F312A4E-4768-4106-B6AA-F1EA96504ED3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

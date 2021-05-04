@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GamePrograming 4 27", "Game
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2D Shooting Project", "2D Shooting Project\2D Shooting Project.vcxproj", "{8F98CF0E-E752-4493-8434-5746FB070D0F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GamePrograming 5 4", "GamePrograming 5 4\GamePrograming 5 4.vcxproj", "{C403F4E3-CED5-48D2-BB3A-11FB46674125}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -91,6 +93,14 @@ Global
 		{8F98CF0E-E752-4493-8434-5746FB070D0F}.Release|x64.Build.0 = Release|x64
 		{8F98CF0E-E752-4493-8434-5746FB070D0F}.Release|x86.ActiveCfg = Release|Win32
 		{8F98CF0E-E752-4493-8434-5746FB070D0F}.Release|x86.Build.0 = Release|Win32
+		{C403F4E3-CED5-48D2-BB3A-11FB46674125}.Debug|x64.ActiveCfg = Debug|x64
+		{C403F4E3-CED5-48D2-BB3A-11FB46674125}.Debug|x64.Build.0 = Debug|x64
+		{C403F4E3-CED5-48D2-BB3A-11FB46674125}.Debug|x86.ActiveCfg = Debug|Win32
+		{C403F4E3-CED5-48D2-BB3A-11FB46674125}.Debug|x86.Build.0 = Debug|Win32
+		{C403F4E3-CED5-48D2-BB3A-11FB46674125}.Release|x64.ActiveCfg = Release|x64
+		{C403F4E3-CED5-48D2-BB3A-11FB46674125}.Release|x64.Build.0 = Release|x64
+		{C403F4E3-CED5-48D2-BB3A-11FB46674125}.Release|x86.ActiveCfg = Release|Win32
+		{C403F4E3-CED5-48D2-BB3A-11FB46674125}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

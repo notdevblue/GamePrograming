@@ -21,10 +21,6 @@ Render::~Render()
 
 DWORD WINAPI Render::renderThread(LPVOID lpParam)
 {
-	while (true)
-	{
-		//renderObject[renderIndex++ % renderObject.Count].Render();
-	}
 
 
 	return(0);

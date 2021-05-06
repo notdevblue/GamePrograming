@@ -6,6 +6,12 @@ void Render::gotoxy(SHORT x, SHORT y)
 
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
+void Render::gotoxy(Vector2 vectorPos)
+{
+	COORD pos = { vectorPos.x, vectorPos.y };
+
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
 
 #pragma region Constructor, Destructor
 
@@ -61,6 +67,7 @@ DWORD WINAPI Render::renderThread(LPVOID lpParam)
 		}
 
 	}
+
 
 	return(0);
 }

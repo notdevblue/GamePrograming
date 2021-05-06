@@ -1,10 +1,18 @@
 #pragma once
 #include <Windows.h>
-#include <deque>
+#include <vector> // queue 써도 될거 같은데 :thinking:
+
+#include "Vector2.h"
+#include "Sprite.h"
 
 
 #define CONSTRUCTOR
 #define DESTRUCTOR
+
+#define FONT_SIZE 11
+
+
+
 
 #define DEBUG
 

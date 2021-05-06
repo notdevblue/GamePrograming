@@ -2,15 +2,12 @@
 #include "Han.h"
 #include "Render.h"
 
-class Player : public Render
+class Player
 {
 private:
-	SHORT xPos;
-	SHORT yPos;
+	Vector2 playerPos;
 
 public:
-
-	VOID addRender() override;
 
 	CONSTRUCTOR Player();
 	DESTRUCTOR ~Player();

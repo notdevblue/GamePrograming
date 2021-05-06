@@ -4,23 +4,33 @@
 
 
 // Render 담당하는 클레스
-// 다른 클레스의 Render();를 여기서 전부 돌린다.
+// 모든 렌더링을 여기서 전부 돌린다.
 class Render
 {	
 private:
 	HANDLE	hRender;
-	INT		renderIndex;
-	//std::deque</*렌더 담당 클레스*/> renderObject;
 
-protected:
-	VOID gotoxy(SHORT, SHORT);
+	struct RenderData
+	{
+		std::vector<Vector2>	renderObjs; // 그릴 위치의 포지션을 담음
+		std::vector<Sprite>		renderStr;	// 그릴 오브젝트의 모습을 담음
+
+		INT	renderIndex;
+	};
+	RenderData renderData;
 
 
-	static DWORD WINAPI renderThread(LPVOID lpParam);
+	
+	static	DWORD WINAPI	renderThread(LPVOID lpParam); // Vector2 와 Sprite 를 구조체로 담아서 넘겨줘야함
+			VOID			gotoxy(SHORT, SHORT);
 
-	virtual VOID addRender() = 0;
 
 public:
+	// vector 에 푸쉬
+	void addRenderPos(Vector2);
+	void addRenderStr(Sprite);
+
+
 	CONSTRUCTOR Render();
 	DESTRUCTOR ~Render();
 };

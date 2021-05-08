@@ -27,7 +27,7 @@ Render::Render()
 	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 
 	renderData.renderIndex = 0;
-	hRender = CreateThread(NULL, 0, renderThread, &renderData, 0, NULL);
+	hRender = CreateThread(NULL, 0, renderThreadStart, &renderData, 0, NULL);
 }
 
 Render::~Render()
@@ -53,21 +53,29 @@ void Render::addRenderStr(Sprite sprite)
 	renderData.renderStr.push_back(sprite);
 }
 
-DWORD WINAPI Render::renderThread(LPVOID lpParam)
+
+#pragma region Thread
+
+DWORD Render::renderThread()
 {
-	RenderData* renderData = (RenderData*)lpParam;
-
-
 	while (false) // TODO : 나중에 조건문 넣어야함
 	{
-		for (int i = 0; i < renderData->renderIndex; ++i)
+		for (int i = 0; i < renderData.renderIndex; ++i)
 		{
-			renderData->renderObjs[i];	// TODO : gotoXY
-			renderData->renderStr[i];	// TODO : printf
+			gotoxy(renderData.renderObjs[i]);	// TODO : gotoXY
+			renderData.renderStr[i].print();	// TODO : printf
 		}
-
 	}
 
 
 	return(0);
 }
+
+// 클래스 멤버 함수로 돌리기 위함
+DWORD WINAPI Render::renderThreadStart(LPVOID lpParam)
+{
+	Render* This = (Render*)lpParam;
+	return This->renderThread();
+}
+
+#pragma endregion

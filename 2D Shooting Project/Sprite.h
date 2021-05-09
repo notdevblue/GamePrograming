@@ -11,6 +11,10 @@ private:
 public:
 	// 동적 2차원 char 배열
 
+	/*
+	배열과 y 수로 돌려줘서 Render 에서 줄 내리는것도 나쁘지않은거같음
+	*/
+
 	void print()
 	{
 		for (int y = 0; y < ySize; ++y)

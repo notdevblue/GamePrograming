@@ -58,17 +58,36 @@ void Render::addRenderStr(Sprite sprite)
 
 DWORD Render::renderThread()
 {
-	while (false) // TODO : 나중에 조건문 넣어야함
+	while (false)
 	{
-		for (int i = 0; i < renderData.renderIndex; ++i)
-		{
-			gotoxy(renderData.renderObjs[i]);	// TODO : gotoXY
-			renderData.renderStr[i].print();	// TODO : printf
-		}
+		draw();
 	}
 
 
 	return(0);
+}
+
+void Render::draw()
+{
+	int y = 0;
+
+	// renderData 안에 들어 있는 모든 것들을 돌림
+	for (int i = 0; i < renderData.renderIndex; ++i)
+	{
+		float	yPos	= renderData.renderObjs[i].y;
+		float	xPos	= renderData.renderObjs[i].x;
+				y		= renderData.renderStr[i].getYsize();
+
+		gotoxy(yPos, xPos);
+
+		// \r\n 쓰면 x 좌표가 0이 되기 때문
+		for (int count = 0; count < y; ++y)
+		{
+			gotoxy(xPos, yPos + count);
+			renderData.renderStr[i].print(count);
+		}
+	}
+
 }
 
 // 클래스 멤버 함수로 돌리기 위함

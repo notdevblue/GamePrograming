@@ -1,4 +1,5 @@
 #pragma once
+#include "Base.h"
 
 // gotoXY가 short 를 받기 때문
 class Vector2

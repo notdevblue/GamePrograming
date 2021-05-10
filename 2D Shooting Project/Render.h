@@ -23,6 +23,7 @@ private:
 	
 	static	DWORD WINAPI	renderThreadStart(LPVOID lpParam); // Vector2 와 Sprite 를 구조체로 담아서 넘겨줘야함
 			DWORD			renderThread();
+			VOID			draw();
 			VOID			gotoxy(SHORT, SHORT);
 			VOID			gotoxy(Vector2);
 

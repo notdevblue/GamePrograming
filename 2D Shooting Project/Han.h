@@ -4,7 +4,7 @@
 
 #include "Vector2.h"
 #include "Sprite.h"
-
+#include "Base.h"
 
 #define CONSTRUCTOR
 #define DESTRUCTOR

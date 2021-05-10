@@ -1,4 +1,5 @@
 #pragma once
+#include "Base.h"
 
 // 꼭 필요한지는 모르겠지만 일단 만들어 봤습니다.
 class Sprite
@@ -7,20 +8,25 @@ private:
 	int		xSize;
 	int		ySize;
 	char**	sprite;
-	char aa[10];
+
 public:
-	// 동적 2차원 char 배열
 
-	/*
-	배열과 y 수로 돌려줘서 Render 에서 줄 내리는것도 나쁘지않은거같음
-	*/
-
-	void print()
+	/// <summary>
+	/// returns array[y] Length
+	/// </summary>
+	/// <returns>array length (int)</returns>
+	inline int getYsize()
 	{
-		for (int y = 0; y < ySize; ++y)
-		{
-			printf("%s", sprite[y]); // TODO : 줄 내려야 함. but HOW
-		}
+		return ySize;
+	}
+
+	/// <summary>
+	/// prints sprite
+	/// </summary>
+	/// <param name="index">index (just put count)</param>
+	inline void print(int index)
+	{
+		printf("%s", sprite[index]);
 	}
 
 
@@ -34,8 +40,8 @@ public:
 	/// <param name="y">: Length of sprite array</param>
 	Sprite(int x,int y, char** original)
 	{
-		xSize = x;
-		ySize = y;
+		xSize = x + 1;
+		ySize = y + 1;
 
 		sprite = new char* [y];
 		for (int count = 0; count < y; ++count)

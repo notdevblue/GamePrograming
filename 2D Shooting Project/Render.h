@@ -21,17 +21,18 @@ private:
 
 
 	
-	static	DWORD WINAPI	renderThreadStart(LPVOID lpParam); // Vector2 와 Sprite 를 구조체로 담아서 넘겨줘야함
-			DWORD			renderThread();
-			VOID			draw();
+	static	DWORD WINAPI	renderThreadStart(LPVOID lpParam);	// 쓰레드 시작 함수
+			DWORD			renderThread();						// 실제 쓰레드
+			VOID			draw();								// Thread 에서 화면에 그리기 위해 호출하는 함수
+
 			VOID			gotoxy(SHORT, SHORT);
 			VOID			gotoxy(Vector2);
 
 
 public:
 	// vector 에 푸쉬
-	void addRenderPos(Vector2);
-	void addRenderStr(Sprite);
+	void addRenderPos(const Vector2&);
+	void addRenderStr(const Sprite&);
 	
 
 	CONSTRUCTOR Render();

@@ -1,21 +1,23 @@
 #include "Render.h"
 
+#pragma region gotoxy
+
 void Render::gotoxy(SHORT x, SHORT y)
 {
 	COORD pos = { x,y };
-
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 void Render::gotoxy(Vector2 vectorPos)
 {
 	COORD pos = { vectorPos.x, vectorPos.y };
-
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
+#pragma endregion
+
 #pragma region Constructor, Destructor
 
-Render::Render()
+CONSTRUCTOR Render::Render()
 {
 	CONSOLE_FONT_INFOEX cfi;
 	cfi.cbSize = sizeof(cfi);
@@ -27,10 +29,10 @@ Render::Render()
 	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 
 	renderData.renderIndex = 0;
-	hRender = CreateThread(NULL, 0, renderThreadStart, &renderData, 0, NULL);
+	hRender = CreateThread(NULL, 0, renderThreadStart, this, 0, NULL);
 }
 
-Render::~Render()
+DESTRUCTOR Render::~Render()
 {
 	if (WaitForSingleObject(hRender, INFINITE) == WAIT_OBJECT_0)
 	{
@@ -42,14 +44,15 @@ Render::~Render()
 
 #pragma endregion
 
-void Render::addRenderPos(Vector2 pos)
+void Render::addRenderPos(const Vector2& pos)
 {
 	renderData.renderObjs.push_back(pos);
 	++renderData.renderIndex;
 }
 
-void Render::addRenderStr(Sprite sprite)
+void Render::addRenderStr(const Sprite& sprite)
 {
+	// TODO : 이거때문에 오류가 나옴\
 	renderData.renderStr.push_back(sprite);
 }
 
@@ -58,9 +61,12 @@ void Render::addRenderStr(Sprite sprite)
 
 DWORD Render::renderThread()
 {
-	while (false)
+	int i = 0;
+
+	while (true)
 	{
 		draw();
+		
 	}
 
 
@@ -69,25 +75,25 @@ DWORD Render::renderThread()
 
 void Render::draw()
 {
-	int y = 0;
+	if (renderData.renderIndex < 1) return;
+		int length = 0;
 
 	// renderData 안에 들어 있는 모든 것들을 돌림
 	for (int i = 0; i < renderData.renderIndex; ++i)
 	{
-		float	yPos	= renderData.renderObjs[i].y;
-		float	xPos	= renderData.renderObjs[i].x;
-				y		= renderData.renderStr[i].getYsize();
+		short	yPos	= renderData.renderObjs[i].y;
+		short	xPos	= renderData.renderObjs[i].x;
+				length	= renderData.renderStr[i].getLength();
 
 		gotoxy(yPos, xPos);
 
 		// \r\n 쓰면 x 좌표가 0이 되기 때문
-		for (int count = 0; count < y; ++y)
+		for (int count = 0; count < length; ++length)
 		{
 			gotoxy(xPos, yPos + count);
 			renderData.renderStr[i].print(count);
 		}
 	}
-
 }
 
 // 클래스 멤버 함수로 돌리기 위함

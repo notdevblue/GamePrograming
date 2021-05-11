@@ -8,6 +8,8 @@ private:
 	int x;
 	int y;
 
+	bool bTiming;
+
 public:
 #pragma region Get Set
 
@@ -24,8 +26,10 @@ public:
 
 	
 	void downNote();
+	void InputNote(char num);
 
-	void checkEnd();
+	void checkEnd(bool input = false);
+	void checkInput();
 
 	void playSound();
 

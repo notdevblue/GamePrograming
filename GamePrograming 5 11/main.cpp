@@ -17,16 +17,22 @@ int main()
 	while (true)
 	{
 		render();
-
+		
 		gotoxy(16, 12);
 		note->drawNote();
 
+		
+
 		gotoxy(16, 12);
 		note->downNote();
+		
 
+		note->checkInput();
 		note->checkEnd();
+		
+		
 
-		sleep(100);
+		sleep(200);
 		system("cls");
 	}
 

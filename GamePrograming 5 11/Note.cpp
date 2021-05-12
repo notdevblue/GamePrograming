@@ -11,16 +11,14 @@ void Note::downNote()
 }
 
 void Note::InputNote(char num)
-{
-	if (_getch_nolock() == -1)
-	{
-		return;
-	}
-	else
-	{
-		checkEnd(true);
-	}
-
+{/*
+	if (_kbhit())
+	{*/
+		if(num == _getch())
+		{
+			checkEnd(true);
+		}
+	//}
 }
 
 void Note::checkInput()
@@ -65,7 +63,7 @@ void Note::checkInput()
 
 void Note::checkEnd(bool input)
 {
-	if (y == 12 || input)
+	if (y == 13 || input)
 	{
 		playSound();
 		initNote();

@@ -1,6 +1,6 @@
 #include "Render.h"
 #include <iostream>
-// ≈¨∑°Ω∫ º≥∞Ë«œ∞Ì ¬•æﬂ«“µÌ »Ï»Ï»Ï»Ï»Ï»Ï»Ï»Ï
+
 
 int main()
 {
@@ -17,15 +17,15 @@ int main()
 	Sprite sprite(3, spr);
 
 	render.addRenderPos(vector);
-	render.addRenderStr(sprite);
+	render.addRenderStr(sprite); // ø©±‚ ¡÷ºÆ√≥∏Æ «œ∏È vector subscript out of range ø¿∑˘∞° ∂‰
 
 
 	printf("øÕºæ¡Ó\r\n");
 	
 
-	//printf("###\r\n");
-	//printf("###\r\n");
-	//printf("###\r\n");
+	printf("###\r\n");
+	printf("###\r\n");
+	printf("###\r\n");
 
 
 

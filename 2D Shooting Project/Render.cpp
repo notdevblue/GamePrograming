@@ -34,6 +34,7 @@ CONSTRUCTOR Render::Render()
 
 DESTRUCTOR Render::~Render()
 {
+	//vector subscript out of range
 	if (WaitForSingleObject(hRender, INFINITE) == WAIT_OBJECT_0)
 	{
 		printf("성공\r\n");
@@ -52,7 +53,7 @@ void Render::addRenderPos(const Vector2& pos)
 
 void Render::addRenderStr(const Sprite& sprite)
 {
-	// TODO : 이거때문에 오류가 나옴\
+	// TODO : 이거때문에 오류가 나옴
 	renderData.renderStr.push_back(sprite);
 }
 

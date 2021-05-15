@@ -2,12 +2,15 @@
 #include <string>
 
 // 꼭 필요한지는 모르겠지만 일단 만들어 봤습니다.
+
+// 소멸자 두번 불리는 문제가 있음.
+// shared_ptr 을 쓰면 해결이 된다고는 함
 class Sprite
 {
 private:
 	int				length;
 	std::string*	sprite;
-
+	//std::shared_ptr<std::string> sprite; // <= TODO : 어케 쓰느지 몰라서 일단 선언만 해둠
 public:
 
 	/// <summary>

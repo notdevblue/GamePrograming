@@ -29,12 +29,15 @@ CONSTRUCTOR Render::Render()
 	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 
 	renderData.renderIndex = 0;
+	renderData.renderObjs.reserve(10);
+	renderData.renderStr.reserve(10);
+
 	hRender = CreateThread(NULL, 0, renderThreadStart, this, 0, NULL);
 }
 
 DESTRUCTOR Render::~Render()
 {
-	//vector subscript out of range
+	//vector subscript out of range 1508
 	if (WaitForSingleObject(hRender, INFINITE) == WAIT_OBJECT_0)
 	{
 		printf("성공\r\n");
@@ -47,13 +50,14 @@ DESTRUCTOR Render::~Render()
 
 void Render::addRenderPos(const Vector2& pos)
 {
+	printf("%p : %d\r\n", &renderData, __LINE__);
 	renderData.renderObjs.push_back(pos);
 	++renderData.renderIndex;
 }
 
 void Render::addRenderStr(const Sprite& sprite)
 {
-	// TODO : 이거때문에 오류가 나옴
+	// TODO : std::out_of_range
 	renderData.renderStr.push_back(sprite);
 }
 
@@ -67,13 +71,14 @@ DWORD Render::renderThread()
 	while (true)
 	{
 		draw();
-		
+		break;
 	}
 
 
 	return(0);
 }
 
+// TODO : 여기서 Vector 밖으로 집 나감
 void Render::draw()
 {
 	if (renderData.renderIndex < 1) return;
@@ -82,9 +87,16 @@ void Render::draw()
 	// renderData 안에 들어 있는 모든 것들을 돌림
 	for (int i = 0; i < renderData.renderIndex; ++i)
 	{
-		short	yPos	= renderData.renderObjs[i].y;
-		short	xPos	= renderData.renderObjs[i].x;
-				length	= renderData.renderStr[i].getLength();
+		printf("%d : %d\r\n", renderData.renderIndex, __LINE__);
+		printf("%llu : %d\r\n", renderData.renderObjs.capacity(), __LINE__);
+		printf("%llu : %d\r\n", renderData.renderStr.capacity(), __LINE__);
+
+		//short	yPos	= renderData.renderObjs[i].y;
+		//short	xPos	= renderData.renderObjs[i].x;
+		//		length	= renderData.renderStr[i].getLength();
+		short	yPos	= renderData.renderObjs.at(i).y;
+		short	xPos	= renderData.renderObjs.at(i).x;
+				length	= renderData.renderStr.at(i).getLength();
 
 		gotoxy(yPos, xPos);
 
@@ -92,7 +104,7 @@ void Render::draw()
 		for (int count = 0; count < length; ++length)
 		{
 			gotoxy(xPos, yPos + count);
-			renderData.renderStr[i].print(count);
+			renderData.renderStr.at(i).print(count);
 		}
 	}
 }

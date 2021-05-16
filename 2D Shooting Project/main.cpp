@@ -20,12 +20,12 @@ int main()
 	render.addRenderStr(sprite); // 여기 주석처리 하면 vector subscript out of range 오류가 뜸
 
 
-	printf("와센즈\r\n");
-	
+	//printf("와센즈\r\n");
+	//
 
-	printf("###\r\n");
-	printf("###\r\n");
-	printf("###\r\n");
+	//printf("###\r\n");
+	//printf("###\r\n");
+	//printf("###\r\n");
 
 
 

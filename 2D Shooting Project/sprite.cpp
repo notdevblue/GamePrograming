@@ -10,6 +10,7 @@ Sprite::Sprite(int size, std::string* arr)
 	for (int i = 0; i < size; ++i)
 	{
 		sprite[i] = arr[i];
+		std::cout << sprite[i] << std::endl;
 	}
 }
 
@@ -19,7 +20,8 @@ Sprite::~Sprite()
 	// == 오류
 
 	// 메인 return(0); 할때 한번
-	// Render 소멸자 부를때 한번 더
+	// Vector[i]로 접근 시 Render 소멸자 부를때 한번 더 불림
+	// Vector.at(i)로 접근 시 오류는 안 나는데 화면에 출력이 되지 않음.
 	delete[] sprite;
 }
 
@@ -30,4 +32,3 @@ void Sprite::print(int index)
 	std::cout << sprite[index];
 	//LeaveCriticalSection(&base_spriteCrit);
 }
-

@@ -91,13 +91,95 @@ void setWords()
 
 void startGame()
 {
+	srand(unsigned(time(NULL)));
+
 	setWords();
 
-	drawStartGame();
+	while (true)
+	{
+		int num = rand() % (int)g_wordQuestion.size();
+		//std::string originalQuestion = g_wordQuestion[num];
+		std::string originalQuestion = g_wordQuestion.at(num);
+
+		int questionLength = (int)originalQuestion.length();
+		std::string question;
+		for (int i = 0; i < questionLength; ++i)
+		{
+			question += "_";
+		}
+
+		while (true)
+		{
+			drawStartGame();
+
+			gotoxy(5, 5);
+			//for (int i = 0; i < questionLength; ++i)
+			//{
+			//	std::cout << question[i];
+			//}
+			for (auto item : question)
+			{
+				std::cout << item << " ";
+			}
+			std::cout << std::endl;
+
+			gotoxy(9, 12);
+			bool inputOK = true;
+			std::string input;
+			std::cin >> input;
+			for (auto item : g_wordHistory)
+			{
+				if (item == input)
+				{
+					inputOK = false;
+				}
+			}
+			if (!inputOK)
+			{
+				continue;
+			}
+
+			g_wordHistory.push_back(input);
+
+			if (input.length() == 1)
+			{
+				for (int i = 0; i < questionLength; ++i)
+				{
+					if (originalQuestion[i] == input[0])
+					{
+						question[i] = input[0];
+					}
+				}
+			}
+			else if (input.length() > 1)
+			{
+				if (originalQuestion == input)
+				{
+					g_wordHistory.clear();
+					break;
+				}
+			}
+			else {}
+		}
+	}
 }
 
 void drawStartGame()
 {
+	system("cls");
+	gotoxy(5, 8);
+	std::cout << "past = ";
+	for (auto item : g_wordHistory)
+	{
+		std::cout << item << " ";
+	}
+	//for (int i = 0; i < (int)g_wordHistory.size(); ++i)
+	//{
+	//	std::cout << g_wordHistory[i] << " ";
+	//}
+
+	gotoxy(5, 12);
+	std::cout << "input = ";
 	
 }
 

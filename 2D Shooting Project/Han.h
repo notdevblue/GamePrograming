@@ -1,6 +1,6 @@
 #pragma once
 #include <Windows.h>
-#include <vector> // queue 써도 될거 같은데 :thinking:
+#include <vector>
 
 #include "Vector2.h"
 #include "Sprite.h"

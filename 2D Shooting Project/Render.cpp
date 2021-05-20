@@ -2,12 +2,12 @@
 
 #pragma region gotoxy
 
-void Render::gotoxy(SHORT x, SHORT y)
+void GameLogic::gotoxy(SHORT x, SHORT y)
 {
 	COORD pos = { x,y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
-void Render::gotoxy(Vector2 vectorPos)
+void GameLogic::gotoxy(Vector2 vectorPos)
 {
 	COORD pos = { vectorPos.x, vectorPos.y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
@@ -17,7 +17,7 @@ void Render::gotoxy(Vector2 vectorPos)
 
 #pragma region Constructor, Destructor
 
-CONSTRUCTOR Render::Render()
+CONSTRUCTOR GameLogic::GameLogic()
 {
 	CONSOLE_FONT_INFOEX cfi;
 	cfi.cbSize = sizeof(cfi);
@@ -32,10 +32,10 @@ CONSTRUCTOR Render::Render()
 	renderData.renderObjs.reserve(10);
 	renderData.renderStr.reserve(10);
 
-	hRender = CreateThread(NULL, 0, renderThreadStart, this, 0, NULL);
+	hRender = CreateThread(NULL, 0, logicThreadLaunch, this, 0, NULL);
 }
 
-DESTRUCTOR Render::~Render()
+DESTRUCTOR GameLogic::~GameLogic()
 {
 	//vector subscript out of range 1508
 	if (WaitForSingleObject(hRender, INFINITE) == WAIT_OBJECT_0)
@@ -48,14 +48,14 @@ DESTRUCTOR Render::~Render()
 
 #pragma endregion
 
-void Render::addRenderPos(const Vector2& pos)
+void GameLogic::addRenderPos(const Vector2& pos)
 {
 	printf("%p : %d\r\n", &renderData, __LINE__);
 	renderData.renderObjs.push_back(pos);
 	++renderData.renderIndex;
 }
 
-void Render::addRenderStr(const Sprite& sprite)
+void GameLogic::addRenderStr(const Sprite& sprite)
 {
 	// TODO : std::out_of_range
 	renderData.renderStr.push_back(sprite);
@@ -64,7 +64,7 @@ void Render::addRenderStr(const Sprite& sprite)
 
 #pragma region Thread
 
-DWORD Render::renderThread()
+DWORD GameLogic::logicThread()
 {
 	int i = 0;
 
@@ -79,7 +79,7 @@ DWORD Render::renderThread()
 }
 
 // TODO : 여기서 Vector 밖으로 집 나감
-void Render::draw()
+void GameLogic::draw()
 {
 	if (renderData.renderIndex < 1) return;
 		int length = 0;
@@ -110,10 +110,10 @@ void Render::draw()
 }
 
 // 클래스 멤버 함수로 돌리기 위함
-DWORD WINAPI Render::renderThreadStart(LPVOID lpParam)
+DWORD WINAPI GameLogic::logicThreadLaunch(LPVOID lpParam)
 {
-	Render* This = (Render*)lpParam;
-	return This->renderThread();
+	GameLogic* This = (GameLogic*)lpParam;
+	return This->logicThread();
 }
 
 #pragma endregion

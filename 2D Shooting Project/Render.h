@@ -3,9 +3,9 @@
 
 
 
-// Render 담당하는 클레스
-// 모든 렌더링을 여기서 전부 돌린다.
-class Render
+// Render, Update 담당하는 클레스
+// 모든 렌더링과 (연산)을 여기서 전부 돌린다.
+class GameLogic
 {	
 private:
 	HANDLE	hRender;
@@ -19,10 +19,15 @@ private:
 	};
 	RenderData renderData;
 
-
+	// 아직 이게 필요한지는 모르겠음
+	struct UpdateData
+	{
+		
+	};
+	UpdateData updataData;
 	
-	static	DWORD WINAPI	renderThreadStart(LPVOID lpParam);	// 쓰레드 시작 함수
-			DWORD			renderThread();						// 실제 쓰레드
+	static	DWORD WINAPI	logicThreadLaunch(LPVOID lpParam);	// 쓰레드 시작 함수
+			DWORD			logicThread();						// 실제 쓰레드
 			VOID			draw();								// Thread 에서 화면에 그리기 위해 호출하는 함수
 
 			VOID			gotoxy(SHORT, SHORT);
@@ -35,6 +40,6 @@ public:
 	void addRenderStr(const Sprite&);
 	
 
-	CONSTRUCTOR Render();
-	DESTRUCTOR ~Render();
+	CONSTRUCTOR GameLogic();
+	DESTRUCTOR ~GameLogic();
 };

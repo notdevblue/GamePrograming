@@ -12,7 +12,7 @@ int main()
 	};
 
 
-	Render render;
+	GameLogic render;
 	Vector2 vector(10, 10);
 	Sprite sprite(3, spr);
 

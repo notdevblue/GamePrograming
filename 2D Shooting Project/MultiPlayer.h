@@ -45,7 +45,7 @@ public:
 	// returns -1 when error
 	int establishConnection();
 
-	// 커넥션 해제
+	// 커넥션 해제, 쓰래드 셧다운 대기
 	void shutDown();
 
 

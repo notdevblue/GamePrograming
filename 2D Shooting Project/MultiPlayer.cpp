@@ -95,7 +95,7 @@ void MultiPlayer::inputIP()
 		}
 	}
 
-	ipAddr = (LPWCH)malloc(sizeof(LPWCH) * addrSize);
+	ipAddr = (LPWCH)malloc(sizeof(WCHAR) * addrSize);
 	for (int i = 0; i < addrSize; ++i)
 	{
 		// 복사앍
@@ -176,19 +176,54 @@ int MultiPlayer::establishConnection()
 		return -1;
 	}
 
+	hRecv = CreateThread(NULL, 0, recvThreadLaunch, this, 0, NULL);
+	hSend = CreateThread(NULL, 0, sendThreadLaunch, this, 0, NULL);
 
-
+	std::cout << "눈앞에 적이 었네요." << std::endl;
 
 
 	return 0;
 }
 
 
+
+
+
+
 void MultiPlayer::shutDown()
 {
+	int isOK = 1;
+
+	try
+	{
+		isOK = WaitForSingleObject(hRecv, INFINITE);
 
 
+		if (isOK != WAIT_OBJECT_0)
+		{
+			throw isOK;
+		}
+	}
+	catch(int e)
+	{
+		std::cerr << "Thread shutdown error at " << __FUNCTION__ << " , line: " << __LINE__ << std::endl;
+		return;
+	}
 
 
+	try
+	{
+		isOK = WaitForSingleObject(hSend, INFINITE);
 
+
+		if (isOK != WAIT_OBJECT_0)
+		{
+			throw isOK;
+		}
+	}
+	catch (int e)
+	{
+		std::cerr << "Thread shutdown error at " << __FUNCTION__ << " , line: " << __LINE__ << std::endl;
+		return;
+	}
 }

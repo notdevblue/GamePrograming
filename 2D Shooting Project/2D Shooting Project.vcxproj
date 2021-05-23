@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MultiPlayer.cpp" />
+    <ClCompile Include="MultiPlayerThread.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="sprite.cpp" />

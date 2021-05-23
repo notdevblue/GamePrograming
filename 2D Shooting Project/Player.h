@@ -1,6 +1,6 @@
 #pragma once
 #include "Han.h"
-#include "Render.h"
+#include "GameLogic.h"
 
 class Player
 {

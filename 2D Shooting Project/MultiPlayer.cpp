@@ -51,7 +51,7 @@ MultiPlayer::MultiPlayer(bool isHost)
 MultiPlayer::~MultiPlayer()
 {
 	closesocket(sEnemy);
-	closesocket(sPlayer);
+	closesocket(sListening);
 
 	WSACleanup();
 
@@ -78,9 +78,9 @@ void MultiPlayer::inputIP()
 				}
 			}
 		}
-		catch (const char* str)
+		catch (const char* e)
 		{
-			std::cerr << str << std::endl;
+			std::cerr << e << std::endl;
 			continue;
 		}
 	}
@@ -112,21 +112,19 @@ void MultiPlayer::createTCPSocket()
 		switch (clientData.sin_family)
 		{
 		case AF_INET:
-			sPlayer = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-			if (sPlayer == INVALID_SOCKET)
+			sListening = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+			if (sListening == INVALID_SOCKET)
 			{
 				// 에외
 				throw "Client socket Invalid";
 			}
 			
-			isOK = bind(sPlayer, (SOCKADDR*)&clientData, sizeof(clientData));
+			isOK = bind(sListening, (SOCKADDR*)&clientData, sizeof(clientData));
 			
 			if (isOK)
 			{
 				throw "bind error";
 			}
-
-
 
 			break;
 
@@ -141,4 +139,56 @@ void MultiPlayer::createTCPSocket()
 		std::cerr << e << " " <<  WSAGetLastError() << std::endl;
 	}
 	
+}
+
+int MultiPlayer::establishConnection()
+{
+	int isOK = 0;
+
+	try
+	{
+		isOK = listen(sListening, SOMAXCONN);
+
+		if (isOK == SOCKET_ERROR)
+		{
+			throw isOK;
+		}
+	}
+	catch(int e)
+	{
+		std::cerr << "Listen error at " << __FUNCTION__ << " , line: " << __LINE__ << std::endl << "Error: " << WSAGetLastError() << std::endl;
+	}
+
+	printf("사람을 찾아보고 있어요...\r\n");
+
+	sEnemy = accept(sListening, (SOCKADDR*)&enemyData, &enemyDataSize);
+
+	try
+	{
+		if (sEnemy == SOCKET_ERROR)
+		{
+			throw "상대방과의 연결에 실패하였습니다...";
+		}
+	}
+	catch (const char* e)
+	{
+		std::cerr << e << std::endl;
+		return -1;
+	}
+
+
+
+
+
+	return 0;
+}
+
+
+void MultiPlayer::shutDown()
+{
+
+
+
+
+
 }

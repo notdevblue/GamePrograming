@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GamePrograming 5 11", "Game
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GamePrograming 5 18", "GamePrograming 5 18\GamePrograming 5 18.vcxproj", "{A38CC109-8507-4A98-BC4F-7A6C962FC6F4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2D Shooting Project Server", "2D Shooting Project Server\2D Shooting Project Server.vcxproj", "{D45E8F15-E066-488F-8B24-99010B2C3DAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -121,6 +123,14 @@ Global
 		{A38CC109-8507-4A98-BC4F-7A6C962FC6F4}.Release|x64.Build.0 = Release|x64
 		{A38CC109-8507-4A98-BC4F-7A6C962FC6F4}.Release|x86.ActiveCfg = Release|Win32
 		{A38CC109-8507-4A98-BC4F-7A6C962FC6F4}.Release|x86.Build.0 = Release|Win32
+		{D45E8F15-E066-488F-8B24-99010B2C3DAA}.Debug|x64.ActiveCfg = Debug|x64
+		{D45E8F15-E066-488F-8B24-99010B2C3DAA}.Debug|x64.Build.0 = Debug|x64
+		{D45E8F15-E066-488F-8B24-99010B2C3DAA}.Debug|x86.ActiveCfg = Debug|Win32
+		{D45E8F15-E066-488F-8B24-99010B2C3DAA}.Debug|x86.Build.0 = Debug|Win32
+		{D45E8F15-E066-488F-8B24-99010B2C3DAA}.Release|x64.ActiveCfg = Release|x64
+		{D45E8F15-E066-488F-8B24-99010B2C3DAA}.Release|x64.Build.0 = Release|x64
+		{D45E8F15-E066-488F-8B24-99010B2C3DAA}.Release|x86.ActiveCfg = Release|Win32
+		{D45E8F15-E066-488F-8B24-99010B2C3DAA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

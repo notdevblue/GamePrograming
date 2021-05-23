@@ -8,7 +8,7 @@ class MultiPlayer
 {
 private:
 	WSADATA		wsaData;
-	SOCKET		sPlayer;
+	SOCKET		sListening;
 	SOCKET		sEnemy;
 	SOCKADDR_IN clientData;
 	SOCKADDR_IN enemyData;
@@ -28,6 +28,7 @@ private:
 
 
 public:
+
 	// 호스트인지 판별, WSAStartup, SOCKADDR_IN 입력 해줌
 	MultiPlayer(bool isHost);
 
@@ -41,7 +42,8 @@ public:
 	void createTCPSocket();
 
 	// 클라이언트를 리스닝 -> 접속 수락 -> 쓰레드 생성 까지 해줌
-	void establishConnection();
+	// returns -1 when error
+	int establishConnection();
 
 	// 커넥션 해제
 	void shutDown();

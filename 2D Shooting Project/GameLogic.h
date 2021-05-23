@@ -1,15 +1,13 @@
 #pragma once
 #include "Han.h"
 
-
-
 // Render, Update 담당하는 클레스
 // 모든 렌더링과 (연산)을 여기서 전부 돌린다.
 class GameLogic
 {	
 private:
 	HANDLE	hRender;
-
+	
 	struct RenderData
 	{
 		std::vector<Vector2>	renderObjs; // 그릴 위치의 포지션을 담음

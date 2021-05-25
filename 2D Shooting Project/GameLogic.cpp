@@ -112,12 +112,17 @@ void GameLogic::draw()
 
 		gotoxy(yPos, xPos);
 
-		// \r\n 쓰면 x 좌표가 0이 되기 때문
-		for (int count = 0; count < length; ++length)
+		
+		
 		{
-			gotoxy(xPos, yPos + count);
-			renderData.renderStr.at(i).print(count);
+			GetLock lock(han_crit);
+			for (int count = 0; count < length; ++length)
+			{
+				gotoxy(xPos, yPos + count);
+				renderData.renderStr.at(i).print(count);
+			}
 		}
+		
 	}
 }
 

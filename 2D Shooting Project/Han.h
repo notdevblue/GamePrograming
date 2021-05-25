@@ -46,7 +46,10 @@ private:
 	CRITICAL_SECTION m_cs;
 };
 
+CriticalSection han_crit
 
+
+// RAII ∆–≈œ
 class GetLock
 {
 public:
@@ -62,6 +65,7 @@ public:
 private:
 	CriticalSection& m_cs;
 };
+
 
 #pragma endregion
 

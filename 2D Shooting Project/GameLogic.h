@@ -6,8 +6,10 @@
 class GameLogic
 {	
 private:
-	HANDLE	hRender;
-	
+	HANDLE hRender;
+	HANDLE hThreadEndEvent;
+
+
 	struct RenderData
 	{
 		std::vector<Vector2>	renderObjs; // 그릴 위치의 포지션을 담음
@@ -33,6 +35,9 @@ private:
 
 
 public:
+
+
+
 	// vector 에 푸쉬
 	void addRenderPos(const Vector2&);
 	void addRenderStr(const Sprite&);

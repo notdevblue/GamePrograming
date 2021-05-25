@@ -1,4 +1,4 @@
-#include "Render.h"
+#include "GameLogic.h"
 #include <iostream>
 
 
@@ -16,16 +16,12 @@ int main()
 	Vector2 vector(10, 10);
 	Sprite sprite(3, spr);
 
-	render.addRenderPos(vector);
 	render.addRenderStr(sprite); // 여기 주석처리 하면 vector subscript out of range 오류가 뜸
+	render.addRenderPos(vector);
+	
 
 
-	//printf("와센즈\r\n");
-	//
-
-	//printf("###\r\n");
-	//printf("###\r\n");
-	//printf("###\r\n");
+	
 
 
 

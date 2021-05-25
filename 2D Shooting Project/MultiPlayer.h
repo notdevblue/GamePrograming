@@ -1,5 +1,7 @@
 #pragma once
+
 #include <WS2tcpip.h>
+#pragma comment(lib, "ws2_32")
 
 #define BUFFER_SIZE 1024
 #define PORT 56789 // 서버개발 노동조합에서 사용하는 포트이기도 합니다. (tmi)

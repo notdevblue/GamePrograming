@@ -32,6 +32,9 @@ CONSTRUCTOR GameLogic::GameLogic()
 	renderData.renderObjs.reserve(10);
 	renderData.renderStr.reserve(10);
 
+	hThreadEndEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
+
+
 	hRender = CreateThread(NULL, 0, logicThreadLaunch, this, 0, NULL);
 }
 
@@ -44,6 +47,7 @@ DESTRUCTOR GameLogic::~GameLogic()
 	}
 
 	CloseHandle(hRender);
+	CloseHandle(hThreadEndEvent);
 }
 
 #pragma endregion
@@ -71,9 +75,17 @@ DWORD GameLogic::logicThread()
 	while (true)
 	{
 		draw();
-		break;
+		/*break;*/
 	}
 
+
+	// GameLogic 에서 WaitForSingleObject 해서 main.cpp 용으로 이벤트 헨들을 하나 만들었어요.
+	if (!SetEvent(hThreadEndEvent))
+	{
+		printf("SetEvent error at %s, line: %d\r\nExitting.\r\n", __FUNCTION__, __LINE__);
+		system("pause");
+		exit(-1);
+	}
 
 	return(0);
 }
@@ -87,9 +99,9 @@ void GameLogic::draw()
 	// renderData 안에 들어 있는 모든 것들을 돌림
 	for (int i = 0; i < renderData.renderIndex; ++i)
 	{
-		printf("%d : %d\r\n", renderData.renderIndex, __LINE__);
-		printf("%llu : %d\r\n", renderData.renderObjs.capacity(), __LINE__);
-		printf("%llu : %d\r\n", renderData.renderStr.capacity(), __LINE__);
+		//printf("%d : %d\r\n", renderData.renderIndex, __LINE__);
+		//printf("%llu : %d\r\n", renderData.renderObjs.capacity(), __LINE__);
+		//printf("%llu : %d\r\n", renderData.renderStr.capacity(), __LINE__);
 
 		//short	yPos	= renderData.renderObjs[i].y;
 		//short	xPos	= renderData.renderObjs[i].x;

@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameLogicThread.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MultiPlayer.cpp" />
     <ClCompile Include="MultiPlayerThread.cpp" />

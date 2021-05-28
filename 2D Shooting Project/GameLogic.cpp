@@ -1,5 +1,7 @@
 #include "GameLogic.h"
 
+
+
 #pragma region gotoxy
 
 void GameLogic::gotoxy(SHORT x, SHORT y)
@@ -34,12 +36,15 @@ CONSTRUCTOR GameLogic::GameLogic()
 
 	hThreadEndEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
 
+	han_crit = new CriticalSection();
 
 	hRender = CreateThread(NULL, 0, logicThreadLaunch, this, 0, NULL);
 }
 
 DESTRUCTOR GameLogic::~GameLogic()
 {
+	delete han_crit;
+
 	//vector subscript out of range 1508
 	if (WaitForSingleObject(hRender, INFINITE) == WAIT_OBJECT_0)
 	{
@@ -64,73 +69,3 @@ void GameLogic::addRenderStr(const Sprite& sprite)
 	// TODO : std::out_of_range
 	renderData.renderStr.push_back(sprite);
 }
-
-
-#pragma region Thread
-
-DWORD GameLogic::logicThread()
-{
-	int i = 0;
-
-	while (true)
-	{
-		draw();
-		/*break;*/
-	}
-
-
-	// GameLogic 에서 WaitForSingleObject 해서 main.cpp 용으로 이벤트 헨들을 하나 만들었어요.
-	if (!SetEvent(hThreadEndEvent))
-	{
-		printf("SetEvent error at %s, line: %d\r\nExitting.\r\n", __FUNCTION__, __LINE__);
-		system("pause");
-		exit(-1);
-	}
-
-	return(0);
-}
-
-// TODO : 여기서 Vector 밖으로 집 나감
-void GameLogic::draw()
-{
-	if (renderData.renderIndex < 1) return;
-		int length = 0;
-
-	// renderData 안에 들어 있는 모든 것들을 돌림
-	for (int i = 0; i < renderData.renderIndex; ++i)
-	{
-		//printf("%d : %d\r\n", renderData.renderIndex, __LINE__);
-		//printf("%llu : %d\r\n", renderData.renderObjs.capacity(), __LINE__);
-		//printf("%llu : %d\r\n", renderData.renderStr.capacity(), __LINE__);
-
-		//short	yPos	= renderData.renderObjs[i].y;
-		//short	xPos	= renderData.renderObjs[i].x;
-		//		length	= renderData.renderStr[i].getLength();
-		short	yPos	= renderData.renderObjs.at(i).y;
-		short	xPos	= renderData.renderObjs.at(i).x;
-				length	= renderData.renderStr.at(i).getLength();
-
-		gotoxy(yPos, xPos);
-
-		
-		
-		{
-			GetLock lock(han_crit);
-			for (int count = 0; count < length; ++length)
-			{
-				gotoxy(xPos, yPos + count);
-				renderData.renderStr.at(i).print(count);
-			}
-		}
-		
-	}
-}
-
-// 클래스 멤버 함수로 돌리기 위함
-DWORD WINAPI GameLogic::logicThreadLaunch(LPVOID lpParam)
-{
-	GameLogic* This = (GameLogic*)lpParam;
-	return This->logicThread();
-}
-
-#pragma endregion

@@ -9,6 +9,7 @@ private:
 	HANDLE hRender;
 	HANDLE hThreadEndEvent;
 
+	CriticalSection* han_crit; // TODO : 이걸 여기에 두면 다른 곳에서 접근을 못함
 
 	struct RenderData
 	{
@@ -36,12 +37,14 @@ private:
 
 public:
 
-
-
 	// vector 에 푸쉬
 	void addRenderPos(const Vector2&);
 	void addRenderStr(const Sprite&);
 	
+	// TODO : hThreadEndEvent Getter
+	HANDLE getEventHandle();
+	
+
 
 	CONSTRUCTOR GameLogic();
 	DESTRUCTOR ~GameLogic();

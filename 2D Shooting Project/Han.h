@@ -1,11 +1,12 @@
 #pragma once
+
 #define _WINSOCK2API_
 #include <Windows.h>
 #include <vector>
 
 #include "Vector2.h"
 #include "Sprite.h"
-#include "Base.h"
+//#include "Base.h"
 
 #define CONSTRUCTOR
 #define DESTRUCTOR
@@ -13,13 +14,15 @@
 #define FONT_SIZE 11
 
 
+#ifndef CSESSION
+#define CSESSION
 #pragma region CRITICAL_SECTION RAII
 
 
 class GetLock;
 
 // 절대로 CriticalSection 을 통해서 lock, unlock 하면 안됩니다.
-class CriticalSection
+class CriticalSection final
 {
 public:
 	CriticalSection()
@@ -42,15 +45,18 @@ private:
 		LeaveCriticalSection(&m_cs);
 	}
 
+
+	explicit operator bool() { return true; }
+
 private:
 	CRITICAL_SECTION m_cs;
 };
 
-CriticalSection han_crit
+
 
 
 // RAII 패턴
-class GetLock
+class GetLock final
 {
 public:
 	GetLock(CriticalSection& plock) : m_cs(plock)
@@ -66,9 +72,11 @@ private:
 	CriticalSection& m_cs;
 };
 
+#define CSLOCK
+
 
 #pragma endregion
-
+#endif
 
 
 

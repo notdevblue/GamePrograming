@@ -2,8 +2,11 @@
 #include <iostream>
 
 
+
 int main()
 {
+	
+
 	std::string spr[3] =
 	{
 		"###",

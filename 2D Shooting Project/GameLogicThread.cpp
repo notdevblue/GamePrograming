@@ -43,8 +43,8 @@ void GameLogic::draw()
 			return;
 		else
 		{
-			yPos = renderData.renderObjs.at(i).y;
-			xPos = renderData.renderObjs.at(i).x;
+			yPos = *renderData.renderObjs.at(i).y;
+			xPos = *renderData.renderObjs.at(i).x;
 		}
 
 		// 빈 백터에서 at 하면 out_of_range
@@ -60,9 +60,10 @@ void GameLogic::draw()
 		CSLOCK
 		{
 			GetLock lock(*han_crit);
-			for (int count = 0; count < length; ++length)
+			for (int count = 0; count < length; ++count)
 			{
 				gotoxy(xPos, yPos + count);
+				// 엑세스 위반
 				renderData.renderStr.at(i).print(count);
 			}
 		}

@@ -6,7 +6,10 @@
 class Sprite
 {
 private:
+	// 배열 순회 용 변수
+	// 인덱스 + 1 입니다.
 	int				length;
+
 	std::string*	sprite;
 	// TODO : 색
 	

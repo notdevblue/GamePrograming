@@ -11,7 +11,7 @@ void GameLogic::gotoxy(SHORT x, SHORT y)
 }
 void GameLogic::gotoxy(Vector2 vectorPos)
 {
-	COORD pos = { vectorPos.x, vectorPos.y };
+	COORD pos = { *vectorPos.x, *vectorPos.y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 

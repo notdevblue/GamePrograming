@@ -5,9 +5,9 @@ Sprite::Sprite(int size, std::string* arr)
 {
 	length = size + 1;
 
-	sprite = new std::string[size];
+	sprite = new std::string[length];
 	
-	for (int i = 0; i < size; ++i)
+	for (int i = 0; i < length; ++i)
 	{
 		sprite[i] = arr[i];
 		std::cout << sprite[i] << std::endl;

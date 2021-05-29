@@ -13,7 +13,6 @@ private:
 	std::string*	sprite;
 	// TODO : 색
 	
-	//std::shared_ptr<std::string> sprite; // <= TODO : 어케 쓰느지 몰라서 일단 선언만 해둠
 
 public:
 

@@ -57,15 +57,20 @@ DESTRUCTOR GameLogic::~GameLogic()
 
 #pragma endregion
 
+const HANDLE GameLogic::getEventHandle()
+{
+	return hThreadEndEvent;
+}
+
 void GameLogic::addRenderPos(const Vector2& pos)
 {
-	printf("%p : %d\r\n", &renderData, __LINE__);
+	// 설계 미스
 	renderData.renderObjs.push_back(pos);
 	++renderData.renderIndex;
 }
 
 void GameLogic::addRenderStr(const Sprite& sprite)
 {
-	// TODO : std::out_of_range
+	// 설계 미스
 	renderData.renderStr.push_back(sprite);
 }

@@ -31,12 +31,30 @@ void GameLogic::draw()
 	int length = 0;
 
 	// renderData 안에 들어 있는 모든 것들을 돌림
+	// std_out_of_range 오류를 고쳐야 함
+	// 설계 미스
 	for (int i = 0; i < renderData.renderIndex; ++i)
 	{
-		short	yPos = renderData.renderObjs.at(i).y;
-		short	xPos = renderData.renderObjs.at(i).x;
-		length = renderData.renderStr.at(i).getLength();
+		short yPos;
+		short xPos;
 
+		// 빈 박터에서 at 하면 out_of_range
+		if (renderData.renderObjs.empty())
+			return;
+		else
+		{
+			yPos = renderData.renderObjs.at(i).y;
+			xPos = renderData.renderObjs.at(i).x;
+		}
+
+		// 빈 백터에서 at 하면 out_of_range
+		if (renderData.renderStr.empty())
+			return;
+		else
+		{
+			length = renderData.renderStr.at(i).getLength();
+		}
+		
 		gotoxy(yPos, xPos);
 
 		CSLOCK

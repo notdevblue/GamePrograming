@@ -3,6 +3,7 @@
 
 
 
+
 int main()
 {
 	
@@ -15,16 +16,22 @@ int main()
 	};
 
 
-	GameLogic render;
+	GameLogic gameLogic;
 	Vector2 vector(10, 10);
 	Sprite sprite(3, spr);
 
-	render.addRenderStr(sprite); // 여기 주석처리 하면 vector subscript out of range 오류가 뜸
-	render.addRenderPos(vector);
+
+
+	gameLogic.addRenderStr(sprite);
+	gameLogic.addRenderPos(vector);
 	
 
 
-	
+	if (WaitForSingleObject(gameLogic.getEventHandle(), INFINITE) != WAIT_OBJECT_0)
+	{
+		std::cerr << "event handle error at " << __FUNCTION__ << ", line: " << __LINE__ << std::endl;
+		return(-1);
+	}
 
 
 

@@ -7,6 +7,8 @@ class GameLogic
 {	
 private:
 	HANDLE hRender;
+
+	// 메인 함수가 끝나서 Sprite 소멸자를 부르지 않게 하기 위한 변수
 	HANDLE hThreadEndEvent;
 
 	CriticalSection* han_crit; // TODO : 이걸 여기에 두면 다른 곳에서 접근을 못함
@@ -37,12 +39,15 @@ private:
 
 public:
 
+	
+
+
 	// vector 에 푸쉬
 	void addRenderPos(const Vector2&);
 	void addRenderStr(const Sprite&);
 	
 	// TODO : hThreadEndEvent Getter
-	HANDLE getEventHandle();
+	const HANDLE getEventHandle();
 	
 
 

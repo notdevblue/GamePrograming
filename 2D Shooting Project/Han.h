@@ -72,11 +72,13 @@ private:
 	CriticalSection& m_cs;
 };
 
+// Critical Section Lock
 #define CSLOCK
 
 
 #pragma endregion
 #endif
+
 
 
 

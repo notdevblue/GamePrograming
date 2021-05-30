@@ -34,6 +34,7 @@ void Render::draw()
 		short yPos;
 		short xPos;
 
+#pragma region 변수 초기화 및 null 체크
 		// 빈 박터에서 at 하면 out_of_range
 		if (renderData.renderObjs.empty())
 			return;
@@ -50,8 +51,7 @@ void Render::draw()
 		{
 			length = renderData.renderStr.at(i).getLength();
 		}
-		
-		//gotoxy(yPos, xPos);
+#pragma endregion
 
 		CSLOCK
 		{
@@ -59,10 +59,9 @@ void Render::draw()
 			for (int count = 0; count < length; ++count)
 			{
 				gotoxy(xPos, yPos + count);
-				// 엑세스 위반
 				renderData.renderStr.at(i).print(count);
 			}
-		}
+		};
 
 	}
 }

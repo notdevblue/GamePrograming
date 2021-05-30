@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Moveable.cpp" />
     <ClCompile Include="RenderThread.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MultiPlayer.cpp" />
@@ -149,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base.h" />
+    <ClInclude Include="Moveable.h" />
     <ClInclude Include="MultiPlayer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Render.h" />

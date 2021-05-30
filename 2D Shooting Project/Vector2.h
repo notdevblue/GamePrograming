@@ -8,7 +8,9 @@ public:
 	short* x;
 	short* y;
 
-	Vector2(short* x, short* y) : x(x), y(y) {  }
+	Vector2(short* x = nullptr, short* y = nullptr) : x(x), y(y) {  }
+
+	void init(short* x, short* y) { this->x = x; this->y = y; }
 
 
 #pragma region Operator

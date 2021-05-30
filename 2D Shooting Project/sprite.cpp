@@ -16,12 +16,6 @@ Sprite::Sprite(int size, std::string* arr)
 
 Sprite::~Sprite()
 {
-	// TODO : 두번 삭제 함
-	// == 오류
-
-	// 메인 return(0); 할때 한번
-	// Vector[i]로 접근 시 Render 소멸자 부를때 한번 더 불림
-	// Vector.at(i)로 접근 시 오류는 안 나는데 화면에 출력이 되지 않음.
 	delete[] sprite;
 }
 

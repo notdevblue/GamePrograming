@@ -6,13 +6,16 @@
 class Render
 {	
 private:
+	// 쓰레드 헨들
 	HANDLE hRender;
 
 	// 메인 함수가 끝나서 Sprite 소멸자를 부르지 않게 하기 위한 변수
 	HANDLE hThreadEndEvent;
 
+
 	CriticalSection* han_crit; // TODO : 이걸 여기에 두면 다른 곳에서 접근을 못함
 
+	// 그릴 오브젝트의 데이터를 담음
 	struct RenderData
 	{
 		std::vector<Vector2>	renderObjs; // 그릴 위치의 포지션을 담음
@@ -21,13 +24,6 @@ private:
 		INT	renderIndex;
 	};
 	RenderData renderData;
-
-	// 아직 이게 필요한지는 모르겠음
-	struct UpdateData
-	{
-		
-	};
-	UpdateData updataData;
 	
 	static	DWORD WINAPI	logicThreadLaunch(LPVOID lpParam);	// 쓰레드 시작 함수
 			DWORD			logicThread();						// 실제 쓰레드
@@ -39,13 +35,10 @@ private:
 
 public:
 
-	
-
-
 	// vector 에 푸쉬
 	void addRenderObj(const Vector2& pos, const Sprite& sprite);
 
-	// TODO : hThreadEndEvent Getter
+	// 쓰레드 종료 이벤트 헨들러 게터
 	const HANDLE getEventHandle();
 	
 

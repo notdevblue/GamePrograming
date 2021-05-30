@@ -139,19 +139,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameLogicThread.cpp" />
+    <ClCompile Include="RenderThread.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MultiPlayer.cpp" />
     <ClCompile Include="MultiPlayerThread.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="Render.cpp" />
     <ClCompile Include="sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base.h" />
     <ClInclude Include="MultiPlayer.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="Render.h" />
     <ClInclude Include="Han.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Vector2.h" />

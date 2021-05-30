@@ -27,8 +27,7 @@ Sprite::~Sprite()
 
 void Sprite::print(int index)
 {
-	// printf 가 안 되서
-	//EnterCriticalSection(&base_spriteCrit);
+	// 함수 호출에서 Critical section 을 걸어둠.
+	// 실행 중에 다른 쓰레드가 불릴 일 없음.
 	std::cout << sprite[index];
-	//LeaveCriticalSection(&base_spriteCrit);
 }

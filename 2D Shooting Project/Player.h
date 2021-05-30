@@ -1,5 +1,5 @@
 #pragma once
-#include "GameLogic.h"
+#include "Render.h"
 
 class Player
 {

@@ -18,7 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameLogic.cpp">
+    <ClCompile Include="Render.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
@@ -33,12 +33,12 @@
     <ClCompile Include="MultiPlayerThread.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameLogicThread.cpp">
+    <ClCompile Include="RenderThread.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameLogic.h">
+    <ClInclude Include="Render.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Han.h">

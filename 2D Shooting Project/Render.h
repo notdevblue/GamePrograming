@@ -3,7 +3,7 @@
 
 // Render, Update 담당하는 클레스
 // 모든 렌더링과 (연산)을 여기서 전부 돌린다.
-class GameLogic
+class Render
 {	
 private:
 	HANDLE hRender;
@@ -43,14 +43,13 @@ public:
 
 
 	// vector 에 푸쉬
-	void addRenderPos(const Vector2&);
-	void addRenderStr(const Sprite&);
-	
+	void addRenderObj(const Vector2& pos, const Sprite& sprite);
+
 	// TODO : hThreadEndEvent Getter
 	const HANDLE getEventHandle();
 	
 
 
-	CONSTRUCTOR GameLogic();
-	DESTRUCTOR ~GameLogic();
+	CONSTRUCTOR Render();
+	DESTRUCTOR ~Render();
 };

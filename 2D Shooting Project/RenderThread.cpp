@@ -1,15 +1,14 @@
-#include "GameLogic.h"
+#include "Render.h"
 
 #pragma region Thread
 
-DWORD GameLogic::logicThread()
+DWORD Render::logicThread()
 {
 	int i = 0;
 
 	while (true)
 	{
 		draw();
-		/*break;*/
 	}
 
 
@@ -25,14 +24,11 @@ DWORD GameLogic::logicThread()
 }
 
 // TODO : 여기서 Vector 밖으로 집 나감
-void GameLogic::draw()
+void Render::draw()
 {
 	if (renderData.renderIndex < 1) return;
 	int length = 0;
 
-	// renderData 안에 들어 있는 모든 것들을 돌림
-	// std_out_of_range 오류를 고쳐야 함
-	// 설계 미스
 	for (int i = 0; i < renderData.renderIndex; ++i)
 	{
 		short yPos;
@@ -55,7 +51,7 @@ void GameLogic::draw()
 			length = renderData.renderStr.at(i).getLength();
 		}
 		
-		gotoxy(yPos, xPos);
+		//gotoxy(yPos, xPos);
 
 		CSLOCK
 		{
@@ -72,9 +68,9 @@ void GameLogic::draw()
 }
 
 // 클래스 멤버 함수로 돌리기 위함
-DWORD WINAPI GameLogic::logicThreadLaunch(LPVOID lpParam)
+DWORD WINAPI Render::logicThreadLaunch(LPVOID lpParam)
 {
-	GameLogic* This = (GameLogic*)lpParam;
+	Render* This = (Render*)lpParam;
 	return This->logicThread();
 }
 

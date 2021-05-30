@@ -1,4 +1,4 @@
-#include "GameLogic.h"
+#include "Render.h"
 #include <iostream>
 
 
@@ -16,7 +16,7 @@ int main()
 	};
 
 
-	GameLogic gameLogic;
+	Render render;
 	
 	short tempX = 10;
 	short tempY = 10;
@@ -28,8 +28,7 @@ int main()
 
 
 
-	gameLogic.addRenderStr(sprite);
-	gameLogic.addRenderPos(vector);
+	render.addRenderObj(vector, sprite);
 	
 
 	short moveY = 1;
@@ -49,7 +48,7 @@ int main()
 	}
 
 
-	if (WaitForSingleObject(gameLogic.getEventHandle(), INFINITE) != WAIT_OBJECT_0)
+	if (WaitForSingleObject(render.getEventHandle(), INFINITE) != WAIT_OBJECT_0)
 	{
 		std::cerr << "event handle error at " << __FUNCTION__ << ", line: " << __LINE__ << std::endl;
 		return(-1);

@@ -1,15 +1,15 @@
-#include "GameLogic.h"
+#include "Render.h"
 
 
 
 #pragma region gotoxy
 
-void GameLogic::gotoxy(SHORT x, SHORT y)
+void Render::gotoxy(SHORT x, SHORT y)
 {
 	COORD pos = { x,y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
-void GameLogic::gotoxy(Vector2 vectorPos)
+void Render::gotoxy(Vector2 vectorPos)
 {
 	COORD pos = { *vectorPos.x, *vectorPos.y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
@@ -19,7 +19,7 @@ void GameLogic::gotoxy(Vector2 vectorPos)
 
 #pragma region Constructor, Destructor
 
-CONSTRUCTOR GameLogic::GameLogic()
+CONSTRUCTOR Render::Render()
 {
 	CONSOLE_FONT_INFOEX cfi;
 	cfi.cbSize = sizeof(cfi);
@@ -41,7 +41,7 @@ CONSTRUCTOR GameLogic::GameLogic()
 	hRender = CreateThread(NULL, 0, logicThreadLaunch, this, 0, NULL);
 }
 
-DESTRUCTOR GameLogic::~GameLogic()
+DESTRUCTOR Render::~Render()
 {
 	delete han_crit;
 
@@ -57,20 +57,14 @@ DESTRUCTOR GameLogic::~GameLogic()
 
 #pragma endregion
 
-const HANDLE GameLogic::getEventHandle()
+const HANDLE Render::getEventHandle()
 {
 	return hThreadEndEvent;
 }
 
-void GameLogic::addRenderPos(const Vector2& pos)
+void Render::addRenderObj(const Vector2& pos, const Sprite& sprite)
 {
-	// 설계 미스
+	renderData.renderStr.push_back(sprite);
 	renderData.renderObjs.push_back(pos);
 	++renderData.renderIndex;
-}
-
-void GameLogic::addRenderStr(const Sprite& sprite)
-{
-	// 설계 미스
-	renderData.renderStr.push_back(sprite);
 }

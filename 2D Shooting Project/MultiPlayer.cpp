@@ -23,7 +23,7 @@ MultiPlayer::MultiPlayer(bool isHost)
 		std::cerr << e << " catched at " << __FUNCTION__ << " at Line: " << __LINE__ << std::endl;
 	}
 
-	if (isHost) // 서버 호스트인지 판단
+	if (isHost) // 서버 호스트인지 판단. <= 아마 필요하지 않을 것
 	{
 		// 구조체 데이터 넣어줌
 		clientData.sin_addr.s_addr	= INADDR_ANY;
@@ -35,6 +35,7 @@ MultiPlayer::MultiPlayer(bool isHost)
 	}
 	else
 	{
+		// 서버 IP 입력 (아마도 필요하지 않을 것)
 		inputIP();
 
 		clientData.sin_family	= AF_INET;
@@ -80,6 +81,7 @@ void MultiPlayer::inputIP()
 		}
 		catch (const char* e)
 		{
+			// 예외
 			std::cerr << e << std::endl;
 			continue;
 		}
@@ -129,13 +131,14 @@ void MultiPlayer::createTCPSocket()
 			break;
 
 		default:
-			// 예외
+			
 			throw "only supports IPv4";
 			break;
 		}
 	}
 	catch (const char* e)
 	{
+		// 예외
 		std::cerr << e << " " <<  WSAGetLastError() << std::endl;
 	}
 	
@@ -156,6 +159,7 @@ int MultiPlayer::establishConnection()
 	}
 	catch(int e)
 	{
+		// 예외
 		std::cerr << "Listen error at " << __FUNCTION__ << " , line: " << __LINE__ << std::endl << "Error: " << WSAGetLastError() << std::endl;
 	}
 
@@ -172,6 +176,7 @@ int MultiPlayer::establishConnection()
 	}
 	catch (const char* e)
 	{
+		// 예외
 		std::cerr << e << std::endl;
 		return -1;
 	}
@@ -206,6 +211,7 @@ void MultiPlayer::shutDown()
 	}
 	catch(int e)
 	{
+		// 예외
 		std::cerr << "Thread shutdown error at " << __FUNCTION__ << " , line: " << __LINE__ << std::endl;
 		return;
 	}
@@ -223,6 +229,7 @@ void MultiPlayer::shutDown()
 	}
 	catch (int e)
 	{
+		// 예외
 		std::cerr << "Thread shutdown error at " << __FUNCTION__ << " , line: " << __LINE__ << std::endl;
 		return;
 	}

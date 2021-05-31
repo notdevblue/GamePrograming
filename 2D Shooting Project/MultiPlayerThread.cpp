@@ -20,7 +20,7 @@ DWORD WINAPI MultiPlayer::sendThreadLaunch(LPVOID lpParam)
 #pragma endregion
 
 
-
+// 적 포지션
 DWORD MultiPlayer::recvThread(LPVOID lpParam)
 {
 
@@ -28,6 +28,7 @@ DWORD MultiPlayer::recvThread(LPVOID lpParam)
 	return(0);
 }
 
+// 본인 포지션
 DWORD MultiPlayer::sendThread(LPVOID lpParam)
 {
 

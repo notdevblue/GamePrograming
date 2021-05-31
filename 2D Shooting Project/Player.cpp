@@ -10,9 +10,16 @@ CONSTRUCTOR Player::Player()
 	y = 10;
 
 	playerPos.init(&x, &y);
+
+	originalSprite[0] = " # # ";
+	originalSprite[1] = " ### ";
+	originalSprite[2] = "#####";
 }
 
+DESTRUCTOR Player::~Player()
+{
 
+}
 
 #pragma endregion
 
@@ -65,7 +72,4 @@ void Player::move()
 		// 예외처리 (할 필요는 없는 듯 하지만)
 		break;
 	}
-
-	
-
 }

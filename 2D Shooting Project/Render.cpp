@@ -34,10 +34,13 @@ CONSTRUCTOR Render::Render()
 	renderData.renderObjs.reserve(10);
 	renderData.renderStr.reserve(10);
 
+	// 쓰레드 종료 이벤트
 	hThreadEndEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
 
+	// CriticalSection 생성
 	han_crit = new CriticalSection();
 
+	// 쓰레드 생성
 	hRender = CreateThread(NULL, 0, logicThreadLaunch, this, 0, NULL);
 }
 
@@ -45,7 +48,7 @@ DESTRUCTOR Render::~Render()
 {
 	delete han_crit;
 
-	//vector subscript out of range 1508
+	// 쓰레드 종료까지 기다림
 	if (WaitForSingleObject(hRender, INFINITE) == WAIT_OBJECT_0)
 	{
 		printf("성공\r\n");

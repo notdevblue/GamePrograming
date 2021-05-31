@@ -31,7 +31,11 @@ public:
 	/// <param name="index">index (just put count)</param>
 	void print(int index);
 
-
+	/// <summary>
+	/// # 배열 사이즈 #
+	/// </summary>
+	/// <param name="size">: Length of sprite array. 0 ~ size</param>
+	void init(int size, std::string* arr);
 
 #pragma region Constructor, Destructor
 

@@ -6,6 +6,10 @@
 class Player : public Moveable
 {
 private:
+	// 플레이어 우주선
+	std::string originalSprite[3];
+
+	Sprite sprite;
 
 	// 실제로 사용되는 위치 변수
 	short x;

@@ -43,7 +43,7 @@ public:
 	/// # 배열 사이즈 #
 	/// </summary>
 	/// <param name="size">: Length of sprite array. 0 ~ size</param>
-	Sprite(int size, std::string* arr);
+	Sprite(int size = NULL, std::string* arr = nullptr);
 
 	// 배열 삭제
 	// 컴퓨터의 메모리는 소중할 겁니다. 아마도요.

@@ -14,6 +14,12 @@ CONSTRUCTOR Player::Player()
 	originalSprite[0] = " # # ";
 	originalSprite[1] = " ### ";
 	originalSprite[2] = "#####";
+
+	sprite.init(2, originalSprite);
+
+	bAPressed = false;
+	bDPressed = false;
+
 }
 
 DESTRUCTOR Player::~Player()
@@ -43,10 +49,16 @@ char Player::getInput()
 	return input;
 }
 
+Vector2* Player::getVector()
+{
+	return &playerPos;
+}
 
-// TODO : 함수 작동을 바꿔야 함.
-// 일단 등속도운동으로 작성했는데
-// 등가속도운동으로 바꿔야 함.
+Sprite* Player::getSprite()
+{
+	return &sprite;
+}
+
 void Player::move()
 {
 	switch (getInput())
@@ -55,21 +67,19 @@ void Player::move()
 		// 키 누르지 않았다는 의미
 		break;
 
-	case 'w':
+	/*case 'w':
 		--y;
 		break;
 	case 's':
 		++y;
-		break;
+		break;*/
 	case 'a':
+	
 		--x;
 		break;
 	case 'd':
+	
 		++x;
-		break;
-
-	default:
-		// 예외처리 (할 필요는 없는 듯 하지만)
 		break;
 	}
 }

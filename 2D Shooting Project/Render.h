@@ -36,7 +36,7 @@ private:
 public:
 
 	// vector 에 푸쉬
-	void addRenderObj(const Vector2& pos, const Sprite& sprite);
+	void addRenderObj(const Vector2* pos, const Sprite* sprite); // TODO : 외부에서 접근을 어케 할까
 
 	// 쓰레드 종료 이벤트 헨들러 게터
 	const HANDLE getEventHandle();

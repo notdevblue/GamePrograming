@@ -6,6 +6,17 @@
 #define BUFFER_SIZE 1024
 #define PORT 56789 // 서버개발 노동조합에서 사용하는 포트이기도 합니다. (tmi)
 
+// Packet(buffer) 구조
+/*										
+A : B
+
+MSG : BUFFER
+
+MSG		= 프로토콜
+BUFFER  = 내용
+*/
+
+
 class MultiPlayer
 {
 private:
@@ -18,7 +29,7 @@ private:
 	LPWCH		ipAddr;
 	CHAR		recvBuffer[BUFFER_SIZE];
 	CHAR		sendBuffer[BUFFER_SIZE];
-	BOOL		isHost; // 서버 여는 사람인지 판별용
+	BOOL		isHost; // 서버 여는 사람인지 판별용 <= 아마도 안 씀
 	HANDLE		hRecv;	// 리시브 쓰레드
 	HANDLE		hSend;	// 센드 쓰레드
 

@@ -18,12 +18,15 @@ private:
 	// 위치 넘겨주는 용도로 사용됨
 	Vector2 playerPos;
 
+	bool bAPressed;
+	bool bDPressed;
+
 public:
-
 	void move() override;
-
 	char getInput();
 
+	Vector2* getVector();
+	Sprite*  getSprite();
 
 
 	CONSTRUCTOR Player();

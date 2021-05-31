@@ -65,9 +65,9 @@ const HANDLE Render::getEventHandle()
 	return hThreadEndEvent;
 }
 
-void Render::addRenderObj(const Vector2& pos, const Sprite& sprite)
+void Render::addRenderObj(const Vector2* pos, const Sprite* sprite)
 {
-	renderData.renderStr.push_back(sprite);
-	renderData.renderObjs.push_back(pos);
+	renderData.renderStr.push_back(*sprite);
+	renderData.renderObjs.push_back(*pos);
 	++renderData.renderIndex;
 }

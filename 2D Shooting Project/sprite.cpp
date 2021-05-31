@@ -1,7 +1,7 @@
 #include "Sprite.h"
 #include <iostream>
 
-Sprite::Sprite(int size = NULL, std::string* arr = nullptr)
+Sprite::Sprite(int size, std::string* arr)
 {
 	if (arr == nullptr) return;
 

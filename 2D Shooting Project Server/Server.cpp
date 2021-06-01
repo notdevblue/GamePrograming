@@ -1,6 +1,7 @@
 #include "Server.h"
 #include <iostream>
 
+#pragma region Constructor, Destructor
 
 Server::Server()
 {
@@ -9,7 +10,6 @@ Server::Server()
 	hThreads = (HANDLE*)malloc(sizeof(HANDLE) * CLIENT_COUNT);
 	sClients = (SOCKET*)malloc(sizeof(SOCKET) * CLIENT_COUNT);
 }
-
 
 Server::~Server()
 {
@@ -20,3 +20,7 @@ Server::~Server()
 	std::cout << "Server is offline." << std::endl;
 
 }
+
+#pragma endregion
+
+

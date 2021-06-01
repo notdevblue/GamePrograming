@@ -3,9 +3,8 @@
 
 #pragma region Constructor, Destructor
 
-MultiPlayer::MultiPlayer(bool isHost)
+MultiPlayer::MultiPlayer()
 {
-	this->isHost = isHost;
 
 	try
 	{
@@ -23,36 +22,23 @@ MultiPlayer::MultiPlayer(bool isHost)
 		std::cerr << e << " catched at " << __FUNCTION__ << " at Line: " << __LINE__ << std::endl;
 	}
 
-	if (isHost) // 서버 호스트인지 판단. <= 아마 필요하지 않을 것
-	{
-		// 구조체 데이터 넣어줌
-		clientData.sin_addr.s_addr	= INADDR_ANY;
-		clientData.sin_family		= AF_INET;
-		clientData.sin_port			= htons(PORT);
 
-		// accept 에서 필요함
-		enemyDataSize				= sizeof(enemyData);
-	}
-	else
-	{
-		// 서버 IP 입력 (아마도 필요하지 않을 것)
-		inputIP();
+	// 서버 IP 입력 (아마도 필요하지 않을 것)
+	// TODO : 상대방 IP 입력 필요하지 않음.
+	// 나중에 만들면 서버 IP 를 ipAddr 에
+	inputIP();
 
-		clientData.sin_family	= AF_INET;
-		clientData.sin_port		= htons(PORT);
-		InetPton(clientData.sin_family, ipAddr, &clientData.sin_addr);
-	}
-
-
-
+	// 소켓 정보 채워줌
+	clientData.sin_family	= AF_INET;
+	clientData.sin_port		= htons(PORT);
+	InetPton(clientData.sin_family, ipAddr, &clientData.sin_addr);
 }
 
 #pragma endregion
 
 MultiPlayer::~MultiPlayer()
 {
-	closesocket(sEnemy);
-	closesocket(sListening);
+	closesocket(sConnection);
 
 	WSACleanup();
 
@@ -114,20 +100,12 @@ void MultiPlayer::createTCPSocket()
 		switch (clientData.sin_family)
 		{
 		case AF_INET:
-			sListening = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-			if (sListening == INVALID_SOCKET)
+			sConnection = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+			if (sConnection == INVALID_SOCKET)
 			{
 				// 에외
 				throw "Client socket Invalid";
 			}
-			
-			isOK = bind(sListening, (SOCKADDR*)&clientData, sizeof(clientData));
-			
-			if (isOK)
-			{
-				throw "bind error";
-			}
-
 			break;
 
 		default:
@@ -148,9 +126,12 @@ int MultiPlayer::establishConnection()
 {
 	int isOK = 0;
 
+	printf("사람을 찾아보고 있어요...\r\n");
+
 	try
 	{
-		isOK = listen(sListening, SOMAXCONN);
+		// TODO : connect
+		isOK = connect(sConnection, (SOCKADDR*)&clientData, sizeof(clientData));
 
 		if (isOK == SOCKET_ERROR)
 		{
@@ -160,20 +141,17 @@ int MultiPlayer::establishConnection()
 	catch(int e)
 	{
 		// 예외
-		std::cerr << "Listen error at " << __FUNCTION__ << " , line: " << __LINE__ << std::endl << "Error: " << WSAGetLastError() << std::endl;
+		std::cerr << "Connect error at " << __FUNCTION__ << " , line: " << __LINE__ << std::endl << "Error: " << WSAGetLastError() << std::endl;
 	}
-
-	printf("사람을 찾아보고 있어요...\r\n");
-
-	sEnemy = accept(sListening, (SOCKADDR*)&enemyData, &enemyDataSize);
 
 	try
 	{
-		if (sEnemy == SOCKET_ERROR)
+		if (sConnection == SOCKET_ERROR)
 		{
-			throw "상대방과의 연결에 실패하였습니다...";
+			throw "연결에 실패하였습니다...";
 		}
 	}
+
 	catch (const char* e)
 	{
 		// 예외
@@ -181,19 +159,15 @@ int MultiPlayer::establishConnection()
 		return -1;
 	}
 
+	// recv 쓰레드
 	hRecv = CreateThread(NULL, 0, recvThreadLaunch, this, 0, NULL);
+	// send 쓰레드
 	hSend = CreateThread(NULL, 0, sendThreadLaunch, this, 0, NULL);
 
 	std::cout << "눈앞에 적이 었네요." << std::endl;
 
-
 	return 0;
 }
-
-
-
-
-
 
 void MultiPlayer::shutDown()
 {

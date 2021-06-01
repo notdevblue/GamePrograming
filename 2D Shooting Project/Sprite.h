@@ -1,15 +1,12 @@
 #pragma once
 #include <string>
 
-// 소멸자 두번 불리는 문제가 있음.
-// shared_ptr 을 쓰면 해결이 된다고는 함
 class Sprite
 {
 private:
 	// 배열 순회 용 변수
 	// 인덱스 + 1 입니다.
 	int				length;
-
 	std::string*	sprite;
 	// TODO : 색
 	

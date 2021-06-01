@@ -21,6 +21,7 @@ DWORD WINAPI MultiPlayer::sendThreadLaunch(LPVOID lpParam)
 
 
 // 적 포지션
+// 적 총알들 전부?
 DWORD MultiPlayer::recvThread(LPVOID lpParam)
 {
 
@@ -29,6 +30,7 @@ DWORD MultiPlayer::recvThread(LPVOID lpParam)
 }
 
 // 본인 포지션
+// 본인 포지션 전부?
 DWORD MultiPlayer::sendThread(LPVOID lpParam)
 {
 

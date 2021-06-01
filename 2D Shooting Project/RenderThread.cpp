@@ -53,6 +53,8 @@ void Render::draw()
 		}
 #pragma endregion
 
+
+		// TODO : 메크로 만들어야 함
 		CSLOCK
 		{
 			GetLock lock(*han_crit);

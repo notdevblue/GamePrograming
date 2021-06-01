@@ -16,20 +16,51 @@ MSG		= 프로토콜
 BUFFER  = 내용
 */
 
+// Render 와 별개로 돌아가야 함?
+// 어케돌리지
+
+// 보내야 하는 것
+/*
+자신의 위치
+
+자신이 발사한 총알의 위치 <= 이게 여러게면 어케함
+또는 자신이 총알을 발사했다는 메세지. <= 이러면 자신 위치에서 위로 쭉 올리기만 하면 되니 간편할거 같기도 한데
+		if(발사)
+		{
+			send(자신 위치);
+		}
+
+*/
+
+// 받아야 하는 것
+/*
+적의 위치
+
+총알들 <= 어케 받지 (보여주기만 해도 됨)
+
+
+
+
+*/
+
+// 서버에서 하는 것
+/*
+
+
+
+*/
 
 class MultiPlayer
 {
 private:
 	WSADATA		wsaData;
-	SOCKET		sListening;
-	SOCKET		sEnemy;
+	SOCKET		sConnection;
 	SOCKADDR_IN clientData;
 	SOCKADDR_IN enemyData;
 	INT			enemyDataSize;
 	LPWCH		ipAddr;
 	CHAR		recvBuffer[BUFFER_SIZE];
 	CHAR		sendBuffer[BUFFER_SIZE];
-	BOOL		isHost; // 서버 여는 사람인지 판별용 <= 아마도 안 씀
 	HANDLE		hRecv;	// 리시브 쓰레드
 	HANDLE		hSend;	// 센드 쓰레드
 
@@ -43,7 +74,7 @@ private:
 public:
 
 	// 호스트인지 판별, WSAStartup, SOCKADDR_IN 입력 해줌
-	MultiPlayer(bool isHost);
+	MultiPlayer();
 
 	// 정리 해줌 (당연하지만)
 	~MultiPlayer();

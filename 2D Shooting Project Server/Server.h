@@ -12,10 +12,9 @@ private:
 
 
 public:
-
-
 	Server();
 	~Server();
+
 
 
 

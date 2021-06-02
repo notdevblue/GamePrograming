@@ -12,6 +12,11 @@ public:
 
 	void init(short* x, short* y) { this->x = x; this->y = y; }
 
+	inline Vector2 get()
+	{
+		Vector2 temp(this->x, this->y);
+		return temp;
+	}
 
 #pragma region Operator
 

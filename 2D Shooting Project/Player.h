@@ -22,6 +22,7 @@ private:
 	bool bDPressed;
 
 public:
+	
 	void move() override;
 	char getInput();
 

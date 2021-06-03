@@ -28,6 +28,8 @@ DWORD MultiPlayer::recvThread(LPVOID lpParam)
 	// playerPos.get();
 	// (아직 구현 안됨) 모든 총알 위치 담긴 class
 
+
+
 	return(0);
 }
 

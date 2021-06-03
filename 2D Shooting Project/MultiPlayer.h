@@ -1,5 +1,9 @@
 #pragma once
+// serialization
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
+#include <sstream>
 #include <WS2tcpip.h>
 #pragma comment(lib, "ws2_32")
 
@@ -70,7 +74,15 @@ private:
 			DWORD			recvThread(LPVOID);
 			DWORD			sendThread(LPVOID);
 
+	// Packet list
+	std::vector</*TODO : DATATYPE*/> sendlist;
 
+	// serialization
+	std::stringstream ss;
+	boost::archive::text_oarchive oa;
+
+	// unserialization
+	boost::archive::text_iarchive ia;
 public:
 
 	// 호스트인지 판별, WSAStartup, SOCKADDR_IN 입력 해줌
@@ -92,6 +104,15 @@ public:
 	// 커넥션 해제, 쓰래드 셧다운 대기
 	void shutDown();
 
+	// data => serialization
+	void toBuffer();
 
+	// serialization => data
+	void toData();
+
+
+	// add packet to serialization
+	// TODO : PacketType
+	void addPacket();
 };
 

@@ -6,10 +6,10 @@
 CONSTRUCTOR Player::Player()
 {
 	// 나중에 바꿔야 함
-	x = 10;
-	y = 10;
+	pos.x = 10;
+	pos.y = 10;
 
-	playerPos.init(&x, &y);
+	playerPos.init(&pos.x, &pos.y);
 
 	originalSprite[0] = " # # ";
 	originalSprite[1] = " ### ";
@@ -75,11 +75,11 @@ void Player::move()
 		break;*/
 	case 'a':
 	
-		--x;
+		--pos.x;
 		break;
 	case 'd':
 	
-		++x;
+		++pos.x;
 		break;
 	}
 }

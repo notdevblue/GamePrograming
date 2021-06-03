@@ -5,6 +5,10 @@
 
 MultiPlayer::MultiPlayer()
 {
+	// TODO : archive √ ±‚»≠
+
+	//oa(ss);
+	//ia(ss);
 
 	try
 	{
@@ -207,4 +211,20 @@ void MultiPlayer::shutDown()
 		std::cerr << "Thread shutdown error at " << __FUNCTION__ << " , line: " << __LINE__ << std::endl;
 		return;
 	}
+}
+
+// TODO : serialization
+void MultiPlayer::toBuffer()
+{
+	//oa << packet;
+}
+
+void MultiPlayer::toData()
+{
+	//ia >> packet
+}
+
+void MultiPlayer::addPacket()
+{
+
 }

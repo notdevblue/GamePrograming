@@ -7,7 +7,7 @@ int main()
 {
 	Render		render;	
 	Player		player;
-	MultiPlayer server;
+	MultiPlayer server; // <= 플레이어 위치 보내고 적 위치 받아서 페킷 클레스에 넣어줌
 
 #pragma region push_back to vectors
 

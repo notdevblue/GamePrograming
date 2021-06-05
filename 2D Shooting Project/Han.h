@@ -4,6 +4,10 @@
 #include <Windows.h>
 #include <vector>
 
+// std::cout << msg << std::endl 은 원자성이 보장되지 않음.
+// 컨테스트 스위칭이 일어나게 되면 매우 큰 일이 일어남
+#include <stdio.h>
+
 #include "Vector2.h"
 #include "Sprite.h"
 //#include "Base.h"
@@ -13,77 +17,8 @@
 
 #define FONT_SIZE 11
 
-
-#ifndef CSESSION
-#define CSESSION
-#pragma region CRITICAL_SECTION RAII
-
-
-class GetLock;
-
-// 절대로 CriticalSection 을 통해서 lock, unlock 하면 안됩니다.
-class CriticalSection final
-{
-public:
-	CriticalSection()
-	{
-		InitializeCriticalSection(&m_cs);
-	}
-	~CriticalSection()
-	{
-		DeleteCriticalSection(&m_cs);
-	}
-private:
-	friend class GetLock;
-
-	void lock()
-	{
-		EnterCriticalSection(&m_cs);
-	}
-	void unlock()
-	{
-		LeaveCriticalSection(&m_cs);
-	}
-
-
-	explicit operator bool() { return true; }
-
-private:
-	CRITICAL_SECTION m_cs;
-};
-
-
-
-
-// RAII 패턴
-class GetLock final
-{
-public:
-	GetLock(CriticalSection& plock) : m_cs(plock)
-	{
-		m_cs.lock();
-	}
-	~GetLock()
-	{
-		m_cs.unlock();
-	}
-
-private:
-	CriticalSection& m_cs;
-};
-
-// Critical Section Lock
-#define CSLOCK
-
-
-#pragma endregion
-#endif
-
-
-
-
-#define DEBUG
-
-#ifdef DEBUG
-#include <stdio.h>
-#endif
+// 주석 메세지 설명
+/*
+TODO : 할 일
+WARN : 주의
+*/

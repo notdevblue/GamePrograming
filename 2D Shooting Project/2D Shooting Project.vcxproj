@@ -72,6 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\boost_1_75_0;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\boost_1_75_0\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -154,7 +156,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base.h" />
+    <ClInclude Include="csession.h" />
     <ClInclude Include="Moveable.h" />
+    <ClInclude Include="MoveableObjectPacket.h" />
     <ClInclude Include="MultiPlayer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Render.h" />

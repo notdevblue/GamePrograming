@@ -38,7 +38,7 @@ CONSTRUCTOR Render::Render()
 	hThreadEndEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
 
 	// CriticalSection 积己
-	han_crit = new CriticalSection();
+	han_crit = new CriticalSession();
 
 	// 静饭靛 积己
 	hRender = CreateThread(NULL, 0, logicThreadLaunch, this, 0, NULL);

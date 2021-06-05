@@ -1,14 +1,19 @@
 #pragma once
-// serialization
+// Packet serialization
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
-
 #include <sstream>
+
 #include <WS2tcpip.h>
 #pragma comment(lib, "ws2_32")
 
+#include "csession.h"
+#include "MoveableObjectPacket.h"
+
 #define BUFFER_SIZE 1024
 #define PORT 56789 // 서버개발 노동조합에서 사용하는 포트이기도 합니다. (tmi)
+
+#pragma region 주석들
 
 // Packet(buffer) 구조
 /*										
@@ -54,6 +59,8 @@ BUFFER  = 내용
 
 */
 
+#pragma endregion
+
 class MultiPlayer
 {
 private:
@@ -65,8 +72,8 @@ private:
 	LPWCH		ipAddr;
 	CHAR		recvBuffer[BUFFER_SIZE];
 	CHAR		sendBuffer[BUFFER_SIZE];
-	HANDLE		hRecv;	// 리시브 쓰레드
-	HANDLE		hSend;	// 센드 쓰레드
+	HANDLE		hRecv;	// 리시브 스레드
+	HANDLE		hSend;	// 센드 스레드
 
 
 	static	DWORD WINAPI	recvThreadLaunch(LPVOID);
@@ -74,45 +81,49 @@ private:
 			DWORD			recvThread(LPVOID);
 			DWORD			sendThread(LPVOID);
 
-	// Packet list
-	std::vector</*TODO : DATATYPE*/> sendlist;
+	// 보낼 페킷 백터
+	std::vector<MoveablePacket> moveablePackets;
 
-	// serialization
+	CriticalSession* han_crit;
+
+	// actual msg buffer
 	std::stringstream ss;
-	boost::archive::text_oarchive oa;
+	// serialization
+	boost::archive::text_oarchive* oa;
+	// deserialization
+	boost::archive::text_iarchive* ia;
 
-	// unserialization
-	boost::archive::text_iarchive ia;
-public:
+	// data => serialization
+	void toBuffer(const MoveablePacket&);
 
-	// 호스트인지 판별, WSAStartup, SOCKADDR_IN 입력 해줌
-	MultiPlayer();
-
-	// 정리 해줌 (당연하지만)
-	~MultiPlayer();
+	// serialization => data
+	void toData(MoveablePacket&);
 
 	// 접속 IP
 	void inputIP();
 
-	// 클라이언트 생성 -> 소켓 바인딩까지 해줌
+public:
+
+	// WSAStartup, SOCKADDR_IN
+	MultiPlayer();
+
+	// cleanup (obviously)
+	~MultiPlayer();
+
+	// creates socket
 	void createTCPSocket();
 
-	// 클라이언트를 리스닝 -> 접속 수락 -> 쓰레드 생성 까지 해줌
+	// connects to server, starts Thread
 	// returns -1 when error
 	int establishConnection();
 
-	// 커넥션 해제, 쓰래드 셧다운 대기
+	// disconnection, waits threads for shutdown.
 	void shutDown();
 
-	// data => serialization
-	void toBuffer();
-
-	// serialization => data
-	void toData();
-
-
 	// add packet to serialization
-	// TODO : PacketType
-	void addPacket();
+	void addPacket(const MoveablePacket& packet);
+
+	// 오버로딩
+	//void addPacket(MoveablePacket packet);
 };
 

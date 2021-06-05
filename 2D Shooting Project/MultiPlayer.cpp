@@ -5,10 +5,20 @@
 
 MultiPlayer::MultiPlayer()
 {
-	// TODO : archive 초기화
+	// vector 크기 미리 잡아줌
+	// TODO : 총알 나오면 이제 클난다
+	moveablePackets.reserve(2);
 
-	//oa(ss);
-	//ia(ss);
+	// TODO : 같은 sstream 버퍼를 쓰는 것이 맞나?
+	// WARN : Thread unsafe
+	oa = new boost::archive::text_oarchive(ss);
+	ia = new boost::archive::text_iarchive(ss);
+	
+	// sstream 클리어
+	ss.str() = "";
+
+	han_crit = new CriticalSession();
+
 
 	try
 	{
@@ -47,6 +57,10 @@ MultiPlayer::~MultiPlayer()
 	WSACleanup();
 
 	free(ipAddr);
+
+	delete han_crit;
+	delete oa;
+	delete ia;
 }
 
 void MultiPlayer::inputIP()
@@ -146,6 +160,7 @@ int MultiPlayer::establishConnection()
 	{
 		// 예외
 		std::cerr << "Connect error at " << __FUNCTION__ << " , line: " << __LINE__ << std::endl << "Error: " << WSAGetLastError() << std::endl;
+		return(-1);
 	}
 
 	try
@@ -160,7 +175,7 @@ int MultiPlayer::establishConnection()
 	{
 		// 예외
 		std::cerr << e << std::endl;
-		return -1;
+		return(-1);
 	}
 
 	// recv 쓰레드
@@ -170,7 +185,7 @@ int MultiPlayer::establishConnection()
 
 	std::cout << "눈앞에 적이 었네요." << std::endl;
 
-	return 0;
+	return(0);
 }
 
 void MultiPlayer::shutDown()
@@ -213,18 +228,7 @@ void MultiPlayer::shutDown()
 	}
 }
 
-// TODO : serialization
-void MultiPlayer::toBuffer()
+void MultiPlayer::addPacket(const MoveablePacket& packet)
 {
-	//oa << packet;
-}
-
-void MultiPlayer::toData()
-{
-	//ia >> packet
-}
-
-void MultiPlayer::addPacket()
-{
-
+	moveablePackets.push_back(packet);
 }

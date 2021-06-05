@@ -1,35 +1,39 @@
+#include "MultiPlayer.h"
 #include "Render.h"
 #include "Player.h"
 #include <iostream>
 
-
-
-
 int main()
 {
-	Render render;	
-	Player player;
-	
-#pragma region push_back to render vector
+	Render		render;	
+	Player		player;
+	MultiPlayer server;
+
+#pragma region push_back to vectors
 
 	render.addRenderObj(player.getVector(), player.getSprite());
+	
+	server.addPacket(*player.getPacketData());
 
+#pragma endregion // Multiplayer, Render
 
-#pragma endregion
-
+	server.createTCPSocket();
+	if (server.establishConnection() == -1)
+	{
+		return(-1);
+	}
 
 	while (true)
 	{
 		system("cls");
 		player.move();
 
-
 		
 		Sleep(1000 / 60); // 60fps
 	}
 
 
-#pragma region 쓰레드 종료 대기
+#pragma region 스레드 종료 대기
 
 	if (WaitForSingleObject(render.getEventHandle(), INFINITE) != WAIT_OBJECT_0)
 	{

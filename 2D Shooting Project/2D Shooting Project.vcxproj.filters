@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{ef4e2218-46d8-44d4-988c-61ec93c0baab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Multiplayer">
+      <UniqueIdentifier>{216a7b53-7466-4ee3-82b9-b43f666750e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{6479d4b2-0ad3-419a-9900-bc729c9a1f24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Multiplayer\Packet">
+      <UniqueIdentifier>{7d7dbd65-43a4-4be5-bef3-ad74103cb67e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,33 +33,27 @@
     <ClCompile Include="Render.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="sprite.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MultiPlayer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MultiPlayerThread.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="RenderThread.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiPlayer.cpp">
+      <Filter>Multiplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiPlayerThread.cpp">
+      <Filter>Multiplayer</Filter>
+    </ClCompile>
     <ClCompile Include="Moveable.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Han.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Vector2.h">
@@ -56,14 +62,26 @@
     <ClInclude Include="Sprite.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Base.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="MultiPlayer.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Multiplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Base.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Han.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="csession.h">
+      <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="Moveable.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveableObjectPacket.h">
+      <Filter>Multiplayer\Packet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

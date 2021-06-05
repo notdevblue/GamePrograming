@@ -5,7 +5,7 @@
 
 CONSTRUCTOR Player::Player()
 {
-	// 나중에 바꿔야 함
+	// TODO : 생성 위치 나중에 바꿔야 함
 	pos.x = 10;
 	pos.y = 10;
 
@@ -57,6 +57,11 @@ Vector2* Player::getVector()
 Sprite* Player::getSprite()
 {
 	return &sprite;
+}
+
+MoveablePacket* Player::getPacketData()
+{
+	return &pos;
 }
 
 void Player::move()

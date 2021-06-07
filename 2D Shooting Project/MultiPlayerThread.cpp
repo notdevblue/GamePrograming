@@ -54,7 +54,15 @@ DWORD MultiPlayer::recvThread(LPVOID lpParam)
 		ss.str() = recvBuffer;
 	}
 	// TODO : 利 其哦 备泅秦具 窃
-	//toData(enemyPacket);
+
+	try
+	{
+		toData(moveablePackets.at(1));
+	}
+	catch(int e)
+	{
+		
+	}
 
 	return(0);
 }

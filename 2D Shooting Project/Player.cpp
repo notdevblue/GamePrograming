@@ -64,27 +64,35 @@ MoveablePacket* Player::getPacketData()
 	return &pos;
 }
 
-void Player::move()
+void Player::move(bool isRemote)
 {
-	switch (getInput())
+	if (!isRemote)
 	{
-	case 0:
-		// 키 누르지 않았다는 의미
-		break;
+		switch (getInput())
+		{
+		case 0:
+			// 키 누르지 않았다는 의미
+			break;
 
-	/*case 'w':
-		--y;
-		break;
-	case 's':
-		++y;
-		break;*/
-	case 'a':
-	
-		--pos.x;
-		break;
-	case 'd':
-	
-		++pos.x;
-		break;
+			/*case 'w':
+				--y;
+				break;
+			case 's':
+				++y;
+				break;*/
+		case 'a':
+
+			--pos.x;
+			break;
+		case 'd':
+
+			++pos.x;
+			break;
+		}
 	}
+	else
+	{
+		// 서버가 알아서 함
+	}
+
 }

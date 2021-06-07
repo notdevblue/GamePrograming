@@ -9,6 +9,6 @@ private:
 
 public:
 
-	virtual void move() abstract = 0;
+	virtual void move(bool isRemote = false) abstract = 0;
 };
 

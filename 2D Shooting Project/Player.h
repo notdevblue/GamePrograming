@@ -26,7 +26,7 @@ private:
 
 public:
 	
-	void move() override;
+	void move(bool isRemote = false) override;
 	char getInput();
 
 	Vector2* getVector();

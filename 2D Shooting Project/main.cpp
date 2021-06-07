@@ -7,27 +7,28 @@ int main()
 {
 	Render		render;	
 	Player		player;
+	Player		enemy;
 	MultiPlayer server; // <= 플레이어 위치 보내고 적 위치 받아서 페킷 클레스에 넣어줌
 
 #pragma region push_back to vectors
 
 	render.addRenderObj(player.getVector(), player.getSprite());
-	
+	render.addRenderObj(enemy.getVector(), enemy.getSprite());
 	server.addPacket(*player.getPacketData());
 
 #pragma endregion // Multiplayer, Render
 
-	server.createTCPSocket();
-	if (server.establishConnection() == -1)
-	{
-		return(-1);
-	}
+	//server.createTCPSocket();
+	//if (server.establishConnection() == -1)
+	//{
+	//	return(-1);
+	//}
 
 	while (true)
 	{
 		system("cls");
 		player.move();
-
+		enemy.move(true);
 		
 		Sleep(1000 / 60); // 60fps
 	}

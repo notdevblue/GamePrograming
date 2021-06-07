@@ -69,7 +69,6 @@ private:
 	SOCKADDR_IN clientData;
 	SOCKADDR_IN enemyData;
 	INT			enemyDataSize;
-	LPWCH		ipAddr;
 	CHAR		recvBuffer[BUFFER_SIZE];
 	CHAR		sendBuffer[BUFFER_SIZE];
 	HANDLE		hRecv;	// 리시브 스레드
@@ -100,7 +99,7 @@ private:
 	void toData(MoveablePacket&);
 
 	// 접속 IP
-	void inputIP();
+	//void inputIP();
 
 public:
 

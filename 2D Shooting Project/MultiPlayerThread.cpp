@@ -53,7 +53,6 @@ DWORD MultiPlayer::recvThread(LPVOID lpParam)
 		recv(sConnection, recvBuffer, BUFFER_SIZE, 0);
 		ss.str() = recvBuffer;
 	}
-	// TODO : 利 其哦 备泅秦具 窃
 
 	try
 	{

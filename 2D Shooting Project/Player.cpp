@@ -11,7 +11,7 @@ CONSTRUCTOR Player::Player()
 
 	playerPos.init(&pos.x, &pos.y);
 
-	originalSprite[0] = " # # ";
+	originalSprite[0] = "#####";
 	originalSprite[1] = " ### ";
 	originalSprite[2] = "#####";
 
@@ -92,6 +92,7 @@ void Player::move(bool isRemote)
 	}
 	else
 	{
+		pos.y = 2;
 		// 서버가 알아서 함
 	}
 

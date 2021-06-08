@@ -7,11 +7,16 @@ Server::Server()
 {
 	std::cout << "Server started." << std::endl;
 
-	hThreads		= (HANDLE*)		malloc(sizeof(HANDLE)		* CLIENT_COUNT);
+	// 배열 동적 할당
 	clientDataArr	= (SOCKADDR_IN*)malloc(sizeof(SOCKADDR_IN)  * CLIENT_COUNT);
 	clientDataSize  = (INT*)		malloc(sizeof(INT)			* CLIENT_COUNT);
 	sClients		= (SOCKET*)		malloc(sizeof(SOCKET)		* CLIENT_COUNT);
 
+	// boost lib
+	oa = new boost::archive::text_oarchive(ss);
+	ia = new boost::archive::text_iarchive(ss);
+
+	// 서버 리스닝 소켓 구조체
 	serverData.sin_addr.s_addr	= INADDR_ANY;
 	serverData.sin_port			= htons(PORT);
 	serverData.sin_family		= AF_INET;
@@ -39,22 +44,28 @@ void Server::listenClients()
 		listen(sListening, SOMAXCONN);
 
 		sClients[i] = accept(sListening, (SOCKADDR*)&clientDataArr[i], &clientDataSize[i]);
+		//inet_ntop(AF_INET, &addr.sin_addr, ip(ip를 담을 char 배열), INET_ADDRSTRLEN);
 		// TODO : 스레드 생성
-
 	}
+
 }
 
 DWORD WINAPI Server::clientThreadLaunch(LPVOID lpParam)
 {
 	Server* _this = (Server*)lpParam;
-	return _this->clientThread(_this);
-	
+	return _this->clientThread(_this);	
 }
-
 
 Server::~Server()
 {
-	free(hThreads);
+	if (WaitForSingleObject(hThread, INFINITE) != WAIT_OBJECT_0)
+	{
+		std::cerr << "Thread event object error." << std::endl;
+	}
+
+	delete ia;
+	delete oa;
+
 	free(sClients);
 	free(clientDataArr);
 	free(clientDataSize);

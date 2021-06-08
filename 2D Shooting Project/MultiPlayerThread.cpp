@@ -56,7 +56,7 @@ DWORD MultiPlayer::recvThread(LPVOID lpParam)
 
 	try
 	{
-		toData(moveablePackets.at(1));
+		toData(moveablePackets.at(1)); // WARN : 위험한 코드
 	}
 	catch(int e)
 	{

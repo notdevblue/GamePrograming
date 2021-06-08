@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "Bullet.h"
+
 #include <conio.h>
 
 #pragma region Constructor, Destructor
@@ -66,34 +68,48 @@ MoveablePacket* Player::getPacketData()
 
 void Player::move(bool isRemote)
 {
+	int tx = pos.x;
+
 	if (!isRemote)
 	{
 		switch (getInput())
 		{
-		case 0:
-			// 키 누르지 않았다는 의미
-			break;
-
-			/*case 'w':
-				--y;
-				break;
-			case 's':
-				++y;
-				break;*/
 		case 'a':
 
-			--pos.x;
+			--tx;
 			break;
 		case 'd':
 
-			++pos.x;
+			++tx;
 			break;
 		}
+
+		if (tx < 0)
+			tx = 0;
+		else if (tx > 100)
+			tx = 100;
+
+		pos.x = tx;
+
 	}
 	else
 	{
 		pos.y = 2;
 		// 서버가 알아서 함
+	}
+
+}
+
+void Player::shoot()
+{
+	char input = _getch_nolock();
+	input = tolower(input);
+
+	switch (input)
+	{
+	case 'j':
+		// TODO : create bullet instance
+		break;
 	}
 
 }

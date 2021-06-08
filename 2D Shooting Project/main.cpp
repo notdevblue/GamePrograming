@@ -1,7 +1,10 @@
 #include "MultiPlayer.h"
 #include "Render.h"
 #include "Player.h"
+#include "Bullet.h"
 #include <iostream>
+
+// TODO : 키 매핑 기능
 
 int main()
 {
@@ -10,11 +13,13 @@ int main()
 	Player		enemy;
 	MultiPlayer server; // <= 플레이어 위치 보내고 적 위치 받아서 페킷 클레스에 넣어줌
 
+
 #pragma region push_back to vectors
 
 	render.addRenderObj(player.getVector(), player.getSprite());
-	render.addRenderObj(enemy.getVector(), enemy.getSprite());
+	//render.addRenderObj(enemy.getVector(), enemy.getSprite());
 	server.addPacket(*player.getPacketData());
+	//server.addPacket(*enemy.getPacketData());
 
 #pragma endregion // Multiplayer, Render
 

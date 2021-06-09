@@ -23,18 +23,24 @@ int main()
 
 #pragma endregion // Multiplayer, Render
 
+#pragma region Server Connection
+
 	//server.createTCPSocket();
 	//if (server.establishConnection() == -1)
 	//{
 	//	return(-1);
 	//}
 
+#pragma endregion
+
 	while (true)
 	{
 		system("cls");
 		player.move();
-		enemy.move(true);
-		
+		player.shoot();
+		//enemy.move(true);
+		//enemy.shoot();
+
 		Sleep(1000 / 60); // 60fps
 	}
 

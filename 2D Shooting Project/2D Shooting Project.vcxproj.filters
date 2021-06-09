@@ -28,6 +28,9 @@
     <Filter Include="Bullet">
       <UniqueIdentifier>{8e250bb0-8437-484d-823e-14ad35d07cc3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pool">
+      <UniqueIdentifier>{5b5f31f8-1a60-497f-95f5-beefcc573b0c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -56,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletPool.cpp">
+      <Filter>Pool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletPool.h">
+      <Filter>Pool</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

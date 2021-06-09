@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletPool.cpp" />
     <ClCompile Include="Moveable.cpp" />
     <ClCompile Include="RenderThread.cpp" />
     <ClCompile Include="main.cpp" />
@@ -158,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="Base.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletPool.h" />
     <ClInclude Include="csession.h" />
     <ClInclude Include="Moveable.h" />
     <ClInclude Include="MoveableObjectPacket.h" />

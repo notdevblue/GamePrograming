@@ -3,7 +3,7 @@
 #pragma region Constructor Destructor
 
 // 발사 할 시 new 로 생성함
-CONSTRUCTOR Bullet::Bullet(short x, bool isRemote) : x(x), isRemote(isRemote)
+CONSTRUCTOR Bullet::Bullet()
 {
 	
 }
@@ -20,7 +20,7 @@ Vector2 Bullet::getVector()
 	return pos;
 }
 
-void Bullet::move()
+void Bullet::move(int x, bool isRemote)
 {
 	*pos.x = x;
 
@@ -31,7 +31,7 @@ void Bullet::move()
 		break;
 
 	case false:
-		++*pos.y;
+		--*pos.y;
 		break;
 	}
 }

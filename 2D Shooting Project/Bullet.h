@@ -2,7 +2,7 @@
 #include "Han.h"
 #include "MoveableObjectPacket.h"
 
-typedef Bullet* LPBULLET;
+#define LPBULLET Bullet*
 
 class Bullet // TODO : 총알 발사 전달을 어케 하지
 {
@@ -10,6 +10,7 @@ private:
 	// Bullets 담아두는 Vector<>
 	// Bullet 은 그저 위나 아레로 잘 감
 	Vector2 pos;
+
 
 public:
 
@@ -22,6 +23,11 @@ public:
 	// Vector getter
 	Vector2 getVector();
 
+	void disable();
+
+
+	// 사용 체크
+	bool isEnabled;
 
 
 	// TODO : 충돌 체크

@@ -1,6 +1,5 @@
 #include "Player.h"
-#include "Bullet.h"
-
+#include "BulletPool.h"
 #include <conio.h>
 
 #pragma region Constructor, Destructor
@@ -109,6 +108,12 @@ void Player::shoot()
 	{
 	case 'j':
 		// TODO : create bullet instance
+		BulletPool::instance->getBullet();
+		// returns Bullet obj. TODO :
+		// => Render 에 푸쉬
+		// => 매 프레임 마다 충돌 체크
+		// => 시팔 머야 이게 살려줘요
+
 		break;
 	}
 

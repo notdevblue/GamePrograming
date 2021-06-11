@@ -5,7 +5,12 @@
 
 CONSTRUCTOR BulletPool::BulletPool()
 {
+	if (instance != nullptr)
+	{
+		printf("WARN: There is already inited BulletPool.\r\n");
+	}
 
+	instance = this;
 }
 
 DESTRUCTOR BulletPool::~BulletPool()
@@ -22,18 +27,32 @@ DESTRUCTOR BulletPool::~BulletPool()
 	catch (int e)
 	{
 		printf("Error at BulletPool destructor.\r\n");
+		printf("Mostly it is queue\r\nLine %d", __LINE__);
 		abort();
 	}
 	
+	delete instance;
 }
 
 #pragma endregion
 
-LPBULLET BulletPool::getBullet()
+_Check_return_ LPBULLET BulletPool::getBullet()
 {
-
-
-	return;
+	if (!bulletPool.front()->isEnabled)
+	{
+		bulletPool.front()->isEnabled;
+		Bullet* temp =  bulletPool.front();
+		bulletPool.pop();
+		bulletPool.push(temp);
+		return temp;
+	}
+	else
+	{
+		Bullet* temp = new Bullet();
+		temp->isEnabled = true;
+		bulletPool.push(temp);
+		return temp;
+	}
 }
 
 // queue·Î ÇÏ³ª Çª½¬ÇØÁÜ

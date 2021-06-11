@@ -15,12 +15,11 @@ private:
 
 public:
 
+	static BulletPool* instance;
+
 	CONSTRUCTOR BulletPool();
 	DESTRUCTOR ~BulletPool();
 
 	VOID addBullet();
-	LPBULLET getBullet();
-
-
-
+	_Check_return_ LPBULLET getBullet();
 };

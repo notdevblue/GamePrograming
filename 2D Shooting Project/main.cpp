@@ -12,12 +12,13 @@ int main()
 	Player		player;
 	Player		enemy;
 	MultiPlayer server; // <= 플레이어 위치 보내고 적 위치 받아서 페킷 클레스에 넣어줌
+	
 
 
 #pragma region push_back to vectors
 
-	render.addRenderObj(player.getVector(), player.getSprite());
-	//render.addRenderObj(enemy.getVector(), enemy.getSprite());
+	render.addRenderObj(player.getVector(), player.getSprite(), &player.enabled);
+	//render.addRenderObj(enemy.getVector(), enemy.getSprite(), &enemy.enabled); 
 	server.addPacket(*player.getPacketData());
 	//server.addPacket(*enemy.getPacketData());
 
@@ -33,14 +34,17 @@ int main()
 
 #pragma endregion
 
+	player.enabled = true;
+	enemy.enabled  = true;
+
 	while (true)
 	{
-		system("cls");
+
 		player.move();
 		player.shoot();
 		//enemy.move(true);
 		//enemy.shoot();
-
+		system("cls");
 		Sleep(1000 / 60); // 60fps
 	}
 

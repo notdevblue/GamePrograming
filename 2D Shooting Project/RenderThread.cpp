@@ -2,11 +2,11 @@
 
 #pragma region Thread
 
-DWORD Render::logicThread()
+DWORD Render::renderThread()
 {
 	int i = 0;
 
-	while (true)
+	while (true) // 조건이 필요함
 	{
 		draw();
 	}
@@ -23,7 +23,7 @@ DWORD Render::logicThread()
 	return(0);
 }
 
-// TODO : 여기서 Vector 밖으로 집 나감
+
 void Render::draw()
 {
 	if (renderData.renderIndex < 1) return;
@@ -72,7 +72,7 @@ void Render::draw()
 DWORD WINAPI Render::logicThreadLaunch(LPVOID lpParam)
 {
 	Render* This = (Render*)lpParam;
-	return This->logicThread();
+	return This->renderThread();
 }
 
 #pragma endregion

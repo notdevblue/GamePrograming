@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "BulletPool.h"
+#include "SoundPlayer.h"
 #include <conio.h>
 
 #pragma region Constructor, Destructor
@@ -8,7 +9,7 @@ CONSTRUCTOR Player::Player()
 {
 	// TODO : 생성 위치 나중에 바꿔야 함
 	pos.x = 10;
-	pos.y = 10;
+	pos.y = 20;
 
 	playerPos.init(&pos.x, &pos.y);
 
@@ -17,10 +18,6 @@ CONSTRUCTOR Player::Player()
 	originalSprite[2] = "#####";
 
 	sprite.init(2, originalSprite);
-
-	bAPressed = false;
-	bDPressed = false;
-
 }
 
 DESTRUCTOR Player::~Player()
@@ -108,11 +105,27 @@ void Player::shoot()
 	{
 	case 'j':
 		// TODO : create bullet instance
-		BulletPool::instance->getBullet();
-		// returns Bullet obj. TODO :
+		
+		// TODO : 누르면 풀메니저에서 총알 하나 가져와서 렌더 클레스에 넣어서 돌리게 하고 해야하는데요
+		// 아니 시팔 이거 로직 터졌네
+		// ㅇ아아아ㅏㄱ
+		
+		// EXPLAIN : 여기서 해야하는거
+		// 
+		// 총알을 위로 쭈우욱 올려야함
+		// 
+		
 		// => Render 에 푸쉬
 		// => 매 프레임 마다 충돌 체크
-		// => 시팔 머야 이게 살려줘요
+		// => 머야 이게 살려줘요
+
+		// WARN : untested code
+		Bullet* bullet = BulletPool::instance().getBullet();
+		SoundPlayer::instance().playSound(SOUNDTYPE::FIRE);
+		
+		// 음 이제 어쩌지
+		bullet->getVector();
+
 
 		break;
 	}

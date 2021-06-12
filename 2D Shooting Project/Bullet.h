@@ -11,6 +11,9 @@ private:
 	// Bullet 은 그저 위나 아레로 잘 감
 	Vector2 pos;
 
+	std::string originalSprite[1];
+
+	Sprite sprite;
 
 public:
 
@@ -30,7 +33,8 @@ public:
 	bool isEnabled;
 
 
-	// TODO : 충돌 체크
-
+	// 적과의 충돌
+	bool collisionCheck(bool isRemote);
+	void onCollision();
 };
 

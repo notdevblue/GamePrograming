@@ -12,14 +12,25 @@ class BulletPool
 {
 private:
 	std::queue<LPBULLET> bulletPool;
+	
+	CONSTRUCTOR BulletPool();
 
 public:
 
-	static BulletPool* instance;
+	// singleton pattern
+	// 외부에서 접근해야 하기 때문에
+	inline static BulletPool& instance()
+	{
+		static BulletPool* bulletPool = new BulletPool();
+		return *bulletPool;
+	}
 
-	CONSTRUCTOR BulletPool();
+
+
 	DESTRUCTOR ~BulletPool();
 
 	VOID addBullet();
+	bool instantiated;
+
 	_Check_return_ LPBULLET getBullet();
 };

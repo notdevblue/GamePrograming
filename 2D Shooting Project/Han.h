@@ -25,3 +25,13 @@ BUG  : BUG
 
 앞 메세지가 없는 주석은 무언가를 설명하거나 생각을 적어 둔 주석이에요.
 */
+
+
+// 소리 종류
+// WARN : END_OF_ENUM 뒤에는 절때로 더 추가하면 안됩니다.
+enum SOUNDTYPE
+{
+	FIRE = 0,
+	HIT,
+	END_OF_ENUM // WARN : no more enums please.
+};

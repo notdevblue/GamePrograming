@@ -33,6 +33,7 @@ CONSTRUCTOR Render::Render()
 	renderData.renderIndex = 0;
 	renderData.renderObjs.reserve(10);
 	renderData.renderStr.reserve(10);
+	renderData.enabled = nullptr;
 
 	// 쓰레드 종료 이벤트
 	hThreadEndEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
@@ -49,9 +50,9 @@ DESTRUCTOR Render::~Render()
 	delete han_crit;
 
 	// 쓰레드 종료까지 기다림
-	if (WaitForSingleObject(hRender, INFINITE) == WAIT_OBJECT_0)
+	if (WaitForSingleObject(hRender, INFINITE) != WAIT_OBJECT_0)
 	{
-		printf("성공\r\n");
+		printf("Thread shutdown error. Render::~Render()\r\n");
 	}
 
 	CloseHandle(hRender);
@@ -65,9 +66,10 @@ const HANDLE Render::getEventHandle()
 	return hThreadEndEvent;
 }
 
-void Render::addRenderObj(const Vector2* pos, const Sprite* sprite)
+void Render::addRenderObj(const Vector2* pos, const Sprite* sprite, bool* enabled)
 {
 	renderData.renderStr.push_back(*sprite);
 	renderData.renderObjs.push_back(*pos);
+	renderData.enabled = enabled;
 	++renderData.renderIndex;
 }

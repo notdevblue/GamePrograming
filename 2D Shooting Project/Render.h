@@ -22,12 +22,13 @@ private:
 		std::vector<Vector2>	renderObjs; // 그릴 위치의 포지션을 담음
 		std::vector<Sprite>		renderStr;	// 그릴 오브젝트의 모습을 담음
 
+		bool* enabled;
 		INT	renderIndex;
 	};
 	RenderData renderData;
 	
 	static	DWORD WINAPI	logicThreadLaunch(LPVOID lpParam);	// 스레드 시작 함수
-			DWORD			logicThread();						// 실제 스레드
+			DWORD			renderThread();						// 실제 스레드
 			VOID			draw();								// Thread 에서 화면에 그리기 위해 호출하는 함수
 
 			VOID			gotoxy(SHORT, SHORT);
@@ -37,7 +38,7 @@ private:
 public:
 
 	// vector 에 푸쉬
-	void addRenderObj(const Vector2* pos, const Sprite* sprite);
+	void addRenderObj(const Vector2* pos, const Sprite* sprite, bool* enabled);
 
 	// 스레드 종료 이벤트 헨들러 getter
 	const HANDLE getEventHandle();

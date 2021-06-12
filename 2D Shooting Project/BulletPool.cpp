@@ -5,12 +5,7 @@
 
 CONSTRUCTOR BulletPool::BulletPool()
 {
-	if (instance != nullptr)
-	{
-		printf("WARN: There is already inited BulletPool.\r\n");
-	}
 
-	instance = this;
 }
 
 DESTRUCTOR BulletPool::~BulletPool()
@@ -30,8 +25,6 @@ DESTRUCTOR BulletPool::~BulletPool()
 		printf("Mostly it is queue\r\nLine %d", __LINE__);
 		abort();
 	}
-	
-	delete instance;
 }
 
 #pragma endregion

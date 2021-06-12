@@ -60,12 +60,19 @@ void Bullet::onCollision()
 }
 
 
-void Bullet::disable()
+void Bullet::disable(bool collision)
 {
+	if (collision)
+	{
+		this->isEnabled = false;
+		return;
+	}
+
 	// 화면 밖으로 나갈 때
 	if ( *this->pos.y < 0 || *this->pos.y > 30) // TODO : 특정한 조건이 필요함
 	{
 		this->isEnabled = false;
+		return;
 	}
 }
 

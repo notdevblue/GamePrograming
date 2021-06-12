@@ -32,6 +32,5 @@ void Sprite::init(int size, std::string* arr)
 	for (int i = 0; i < length; ++i)
 	{
 		sprite[i] = arr[i];
-		std::cout << sprite[i] << std::endl;
 	}
 }

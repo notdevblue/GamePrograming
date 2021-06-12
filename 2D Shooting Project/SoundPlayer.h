@@ -19,14 +19,13 @@ public:
 	}
 
 	void addToSoundQueue(SOUNDTYPE type);
-	void playSound(SOUNDTYPE type);
-
+	
 
 	~SoundPlayer();
 
 private:
 	SoundPlayer();
-
+	void playSound(SOUNDTYPE type);
 
 	static	DWORD WINAPI	launchSoundPlayerThread(LPVOID lpParam);
 			DWORD			soundPlayerThread(LPVOID lpParam);

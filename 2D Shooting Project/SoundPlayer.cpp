@@ -34,10 +34,11 @@ void SoundPlayer::playSound(SOUNDTYPE type)
 	{
 	case SOUNDTYPE::FIRE:
 		// TODO : 家府 持绢拎具 窃
+		//Beep();
 		break;
 
 	case SOUNDTYPE::HIT:
-
+		//Beep();
 		break;
 	}
 }

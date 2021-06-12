@@ -29,7 +29,7 @@ BUG  : BUG
 
 // 소리 종류
 // WARN : END_OF_ENUM 뒤에는 절때로 더 추가하면 안됩니다.
-enum SOUNDTYPE
+enum class SOUNDTYPE
 {
 	FIRE = 0,
 	HIT,

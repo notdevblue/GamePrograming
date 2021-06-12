@@ -121,7 +121,7 @@ void Player::shoot()
 
 		// WARN : untested code
 		Bullet* bullet = BulletPool::instance().getBullet();
-		SoundPlayer::instance().playSound(SOUNDTYPE::FIRE);
+		SoundPlayer::instance().addToSoundQueue(SOUNDTYPE::FIRE);
 		
 		// 음 이제 어쩌지
 		bullet->getVector();

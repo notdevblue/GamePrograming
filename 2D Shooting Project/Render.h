@@ -7,6 +7,8 @@
 class Render
 {	
 private:
+	
+
 	// 스레드 헨들
 	HANDLE hRender;
 
@@ -43,7 +45,11 @@ public:
 	// 스레드 종료 이벤트 헨들러 getter
 	const HANDLE getEventHandle();
 	
-
+	//inline static Render instance()
+	//{
+	//	Render* render = new Render();
+	//	return *render;
+	//}
 
 	CONSTRUCTOR Render();
 	DESTRUCTOR ~Render();

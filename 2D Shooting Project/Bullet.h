@@ -26,7 +26,8 @@ public:
 	// Vector getter
 	Vector2 getVector();
 
-	void disable();
+	// 비활성화
+	void disable(bool collision = true);
 
 
 	// 사용 체크

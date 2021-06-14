@@ -9,7 +9,7 @@ CONSTRUCTOR Player::Player()
 {
 	// TODO : 생성 위치 나중에 바꿔야 함
 	pos.x = 10;
-	pos.y = 20;
+	pos.y = 40;
 
 	playerPos.init(&pos.x, &pos.y);
 
@@ -96,8 +96,18 @@ void Player::move(bool isRemote)
 
 }
 
-void Player::shoot()
+void Player::shoot(bool isRemote)
 {
+	if(isRemote)
+	{
+		if (pos.fire)
+		{
+			Bullet* bullet = BulletPool::instance().getBullet();
+			SoundPlayer::instance().addToSoundQueue(SOUNDTYPE::FIRE);
+		}
+		return;
+	}
+
 	char input = _getch_nolock();
 	input = tolower(input);
 

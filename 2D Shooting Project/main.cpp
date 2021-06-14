@@ -31,9 +31,9 @@ int main()
 #pragma region push_back to vectors
 
 	render.addRenderObj(player.getVector(), player.getSprite(), &player.enabled);
-	//render.addRenderObj(enemy.getVector(), enemy.getSprite(), &enemy.enabled); 
+	render.addRenderObj(enemy.getVector(), enemy.getSprite(), &enemy.enabled); 
 	server.addPacket(*player.getPacketData());
-	//server.addPacket(*enemy.getPacketData());
+	server.addPacket(*enemy.getPacketData());
 
 #pragma endregion // Multiplayer, Render
 
@@ -55,8 +55,9 @@ int main()
 
 		player.move();
 		player.shoot();
-		//enemy.move(true);
-		//enemy.shoot();
+		enemy.move(true);
+		enemy.shoot(true);
+
 		system("cls");
 		Sleep(1000 / 60); // 60fps
 	}

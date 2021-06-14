@@ -24,7 +24,7 @@ private:
 public:
 	
 	void move(bool isRemote = false) override;
-	void shoot();
+	void shoot(bool isRemote = false);
 	
 	char getInput();
 

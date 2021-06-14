@@ -13,12 +13,16 @@ public:
 	short x;
 	short y;
 
+	// Bullet Fired
+	bool fire;
+
 	template<typename Archive>
 	void serialize(Archive& ar, const unsigned int version)
 	{
 		ar& id;
 		ar& x;
 		ar& y;
+		ar& fire;
 	}
 };
 #pragma pack(pop)

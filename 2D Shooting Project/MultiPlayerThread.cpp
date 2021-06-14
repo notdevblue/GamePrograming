@@ -78,6 +78,8 @@ DWORD MultiPlayer::sendThread(LPVOID lpParam)
 		// WARN : 이렇게 작성하면 안됨.
 		// send 도 recv 와 같은 이유
 		send(sConnection, ss.str().c_str(), BUFFER_SIZE, 0);
+
+		packet.fire = false;
 	}
 
 	return(0);

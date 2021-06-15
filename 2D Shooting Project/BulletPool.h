@@ -8,6 +8,15 @@
 // template 으로 만들게되면 안그래도 배고픈 이 학생은 매우 엄청난 에너지를 빼앗겨 하루 5끼를 먹을 수 있게 됩니다.
 
 
+/*
+
+자건쌤의 의견
+- 총알 자체를 그냥 메인으로 빼버려서 
+
+
+
+*/
+
 class BulletPool
 {
 private:
@@ -25,12 +34,11 @@ public:
 		return *bulletPool;
 	}
 
-
+	std::queue<LPBULLET>* getBulletPool();
 
 	DESTRUCTOR ~BulletPool();
 
 	VOID addBullet();
-	bool instantiated;
 
 	_Check_return_ LPBULLET getBullet();
 };

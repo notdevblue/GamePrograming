@@ -17,7 +17,7 @@ CONSTRUCTOR Player::Player()
 	originalSprite[1] = " ### ";
 	originalSprite[2] = "#####";
 
-	sprite.init(2, originalSprite);
+	sprite.init(2, originalSprite, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 }
 
 DESTRUCTOR Player::~Player()
@@ -131,7 +131,7 @@ void Player::shoot(bool isRemote)
 
 		// WARN : untested code
 		Bullet* bullet = BulletPool::instance().getBullet();
-		SoundPlayer::instance().addToSoundQueue(SOUNDTYPE::FIRE);
+		//SoundPlayer::instance().addToSoundQueue(SOUNDTYPE::FIRE);
 		
 		// 음 이제 어쩌지
 		bullet->getVector();

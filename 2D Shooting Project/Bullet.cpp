@@ -9,7 +9,7 @@ CONSTRUCTOR Bullet::Bullet()
 	isEnabled = false;
 
 	originalSprite[0] = "*"; // π∫∞° √—æÀ¿Ã √ ∂Û«—µ•
-	sprite.init(0, originalSprite);
+	sprite.init(0, originalSprite, FOREGROUND_RED | FOREGROUND_INTENSITY);
 }
 
 DESTRUCTOR Bullet::~Bullet()

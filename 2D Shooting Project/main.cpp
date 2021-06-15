@@ -17,11 +17,11 @@
 
 // 결론: 만드는건 잘 했지만 코드 꼴이 매우.
 
-// WARN , BUG , TODO : 잘못된 Singleton 사용.
+// WARN , BUG , TODO : 잘못된 Singleton 사용 => BolletPool, Render, SoundPlayer
 
 int main()
 {
-	Render		render;	// <= 싱글톤 패턴으로 처리함
+	Render		render;	// <= 싱글톤 패턴으로 처리를 해야 할 거 같
 	Player		player;
 	Player		enemy;
 	MultiPlayer server; // <= 플레이어 위치 보내고 적 위치 받아서 페킷 클레스에 넣어줌
@@ -33,7 +33,7 @@ int main()
 	render.addRenderObj(player.getVector(), player.getSprite(), &player.enabled);
 	render.addRenderObj(enemy.getVector(), enemy.getSprite(), &enemy.enabled); 
 	server.addPacket(*player.getPacketData());
-	server.addPacket(*enemy.getPacketData());
+	server.addPacket(*enemy.getPacketData()); // WARN : 설계가 잘못된거긴한데 무조건 적 패킷이 두번째로 들어가야 함
 
 #pragma endregion // Multiplayer, Render
 
@@ -62,6 +62,8 @@ int main()
 		Sleep(1000 / 60); // 60fps
 	}
 
+
+	server.shutDown();
 
 #pragma region 스레드 종료 대기
 

@@ -9,6 +9,10 @@ SoundPlayer::SoundPlayer()
 
 SoundPlayer::~SoundPlayer()
 {
+
+	printf("SoundPlayer Destructor\r\n");
+
+
 	if (WaitForSingleObject(hThread, INFINITE) != WAIT_OBJECT_0)
 	{
 		printf("Thread shutdown error. SoundPlayer::~SoundPlayer()\r\n");

@@ -10,6 +10,8 @@ CONSTRUCTOR BulletPool::BulletPool()
 
 DESTRUCTOR BulletPool::~BulletPool()
 {
+	printf("BulletPool Destructor\r\n");
+
 	// 메모리 할당 해제와 큐 비우기
 	try
 	{
@@ -31,6 +33,11 @@ DESTRUCTOR BulletPool::~BulletPool()
 
 _Check_return_ LPBULLET BulletPool::getBullet()
 {
+	if (bulletPool.empty())
+	{
+		addBullet();
+	}
+
 	if (!bulletPool.front()->isEnabled)
 	{
 		bulletPool.front()->isEnabled;
@@ -52,4 +59,9 @@ _Check_return_ LPBULLET BulletPool::getBullet()
 VOID BulletPool::addBullet()
 {
 	bulletPool.push(new Bullet());
+}
+
+std::queue<LPBULLET>* BulletPool::getBulletPool()
+{
+	return &bulletPool;
 }

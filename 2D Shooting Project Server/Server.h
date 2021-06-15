@@ -1,6 +1,6 @@
 #pragma once
 
-// Packet serialization
+// Packet serialization, 필요는 없을거 같긴하지만
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <sstream>

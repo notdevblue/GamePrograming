@@ -39,7 +39,7 @@ MultiPlayer::MultiPlayer()
 	// 소켓 정보 채워줌
 	clientData.sin_family	= AF_INET;
 	clientData.sin_port		= htons(PORT);
-	InetPton(clientData.sin_family, TEXT("127.0.0.1"), &clientData.sin_addr);
+	InetPton(clientData.sin_family, TEXT("127.0.0.1"), &clientData.sin_addr); // WARN : Loopback Address
 }
 
 #pragma endregion
@@ -175,8 +175,9 @@ int MultiPlayer::establishConnection()
 	// send 쓰레드
 	hSend = CreateThread(NULL, 0, sendThreadLaunch, this, 0, NULL);
 
-	std::cout << "눈앞에 적이 었네요." << std::endl;
+	printf("눈앞에 적이 있네요.");
 
+	Sleep(2000);
 	return(0);
 }
 

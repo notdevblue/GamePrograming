@@ -60,7 +60,7 @@ DWORD MultiPlayer::recvThread(LPVOID lpParam)
 	}
 	catch(int e)
 	{
-		
+		printf("%d %s\r\nmoveablePackets vector error.", __LINE__, __FUNCTION__);
 	}
 
 	return(0);
